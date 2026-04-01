@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>生物实验室灵巧手 - 项目管理中心</title>
+    <title>Bio-Lab Dexterous Robot Hand | Project Management</title>
     <style>
         * {
             margin: 0;
@@ -12,68 +12,213 @@
         }
         
         :root {
-            --primary: #2563eb;
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --bg-light: #f8fafc;
-            --text-primary: #0f172a;
-            --text-light: #64748b;
-            --border: #e2e8f0;
+            --dark: #0f172a;
+            --darker: #020617;
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f0f4f8 0%, #d9e8f5 100%);
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--darker);
             color: var(--text-primary);
             min-height: 100vh;
-            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        /* 动态背景 */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            animation: bgMove 20s ease-in-out infinite;
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(2%, 2%) rotate(1deg); }
+            66% { transform: translate(-1%, 1%) rotate(-1deg); }
         }
         
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
         }
         
-        /* 头部 */
-        .header {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-left: 5px solid var(--primary);
-        }
-        
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: var(--primary);
+        /* 语言切换 */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
             display: flex;
-            align-items: center;
-            gap: 15px;
+            gap: 8px;
         }
         
-        .project-icon {
-            font-size: 40px;
+        .lang-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            color: var(--text-secondary);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
         }
         
-        .header p {
-            color: var(--text-light);
-            line-height: 1.6;
-            max-width: 800px;
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
         
-        /* 导航标签 */
+        .lang-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(14, 165, 233, 0); }
+        }
+        
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        
+        /* 图片画廊 */
+        .image-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .showcase-img {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+        
+        .showcase-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .showcase-img:hover img {
+            transform: scale(1.1);
+        }
+        
+        .showcase-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(2, 6, 23, 0.8) 100%);
+        }
+        
+        .showcase-label {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            z-index: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .image-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 导航 */
         .tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--border);
+            gap: 4px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 6px;
+            border-radius: 16px;
+            margin-bottom: 40px;
             overflow-x: auto;
-            padding-bottom: 0;
+            border: 1px solid var(--glass-border);
         }
         
         .tab-btn {
@@ -81,21 +226,22 @@
             border: none;
             background: transparent;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
-            color: var(--text-light);
-            border-bottom: 3px solid transparent;
+            color: var(--text-secondary);
+            border-radius: 12px;
             transition: all 0.3s;
             white-space: nowrap;
         }
         
         .tab-btn.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
         }
         
-        .tab-btn:hover {
-            color: var(--primary);
+        .tab-btn:hover:not(.active) {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-primary);
         }
         
         .tab-content {
@@ -104,194 +250,246 @@
         
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.4s ease;
         }
         
-        /* 概览卡片 */
-        .overview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .overview-card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-top: 4px solid var(--primary);
-        }
-        
-        .overview-card h3 {
-            font-size: 14px;
-            color: var(--text-light);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .overview-card .value {
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-        
-        .overview-card .detail {
-            font-size: 13px;
-            color: var(--text-light);
-        }
-        
-        /* 主网格 */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        @media (max-width: 1024px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* 卡片样式 */
+        /* 卡片 */
         .card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 24px;
         }
         
         .card h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        /* 团队成员 */
-        .team-member {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .team-member:last-child {
-            border-bottom: none;
-        }
-        
-        .member-info {
+            font-size: 24px;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
             gap: 12px;
-            flex: 1;
         }
         
-        .member-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), #0ea5e9);
+        .card h2 .icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
+            font-size: 24px;
         }
         
-        .member-details h4 {
-            font-size: 15px;
+        /* 统计卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* 团队成员 */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .team-member {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+        }
+        
+        .team-member:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .member-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .member-info h4 {
+            font-size: 18px;
             margin-bottom: 4px;
         }
         
         .member-role {
             font-size: 13px;
-            color: var(--text-light);
+            color: var(--primary);
+            margin-bottom: 8px;
         }
         
-        .member-status {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
+        .member-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
         
-        .status-active {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
         }
         
-        /* 任务条目 */
-        .task-item {
-            background: #f8fafc;
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid var(--darker);
+            box-shadow: 0 0 20px var(--primary);
+        }
+        
+        .timeline-date {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* 任务卡片 */
+        .task-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
             border-left: 4px solid var(--primary);
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            cursor: pointer;
             transition: all 0.3s;
         }
         
-        .task-item:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transform: translateX(4px);
+        .task-card:hover {
+            border-left-color: var(--secondary);
         }
+        
+        .task-card.high { border-left-color: var(--danger); }
+        .task-card.medium { border-left-color: var(--warning); }
         
         .task-header {
             display: flex;
             justify-content: space-between;
             align-items: start;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         
         .task-title {
+            font-size: 16px;
             font-weight: 600;
-            font-size: 15px;
         }
         
         .task-owner {
-            font-size: 12px;
-            color: white;
             background: var(--primary);
-            padding: 3px 10px;
-            border-radius: 12px;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
         }
         
-        .task-progress {
+        .progress-bar {
             width: 100%;
             height: 6px;
-            background: #e2e8f0;
+            background: rgba(255,255,255,0.1);
             border-radius: 3px;
             overflow: hidden;
-            margin-top: 8px;
+            margin-top: 12px;
         }
         
-        .task-progress-bar {
+        .progress-fill {
             height: 100%;
-            background: var(--success);
-            transition: width 0.3s;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+            transition: width 0.5s ease;
         }
         
-        /* 输入表单 */
+        /* 表单 */
         .form-section {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 30px;
-        }
-        
-        .form-section h3 {
-            margin-bottom: 20px;
-            color: var(--primary);
-            font-size: 18px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 24px;
         }
         
         .form-group {
@@ -302,19 +500,20 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: var(--text-primary);
+            color: var(--text-secondary);
         }
         
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.3s;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 15px;
+            transition: all 0.3s;
         }
         
         .form-group input:focus,
@@ -322,6 +521,7 @@
         .form-group select:focus {
             outline: none;
             border-color: var(--primary);
+            background: rgba(255,255,255,0.1);
         }
         
         .form-group textarea {
@@ -336,523 +536,447 @@
         }
         
         @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+            .form-row { grid-template-columns: 1fr; }
         }
         
-        .button {
-            padding: 12px 24px;
+        .btn-primary {
+            width: 100%;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
         }
         
-        .button-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .button-primary:hover {
-            background: #1d4ed8;
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
         }
         
-        .button-secondary {
-            background: var(--border);
-            color: var(--text-primary);
-        }
-        
-        .button-secondary:hover {
-            background: #cbd5e1;
-        }
-        
-        /* 时间线 */
-        .timeline {
-            position: relative;
-            padding-left: 30px;
-        }
-        
-        .timeline-item {
-            margin-bottom: 24px;
-            position: relative;
-        }
-        
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -20px;
-            top: 8px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-        
-        .timeline-item:first-child::after {
-            content: '';
-            position: absolute;
-            left: -14px;
-            top: 20px;
-            width: 2px;
-            height: calc(100% + 4px);
-            background: var(--border);
-        }
-        
-        .timeline-date {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 4px;
-            font-weight: 600;
-        }
-        
-        .timeline-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .timeline-desc {
-            font-size: 14px;
-            color: var(--text-light);
-        }
-        
-        /* 工作输入记录 */
+        /* 工作日志 */
         .work-log {
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 12px;
-            margin-top: 12px;
-            border-left: 3px solid var(--success);
+            background: var(--glass);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--success);
         }
         
         .work-log-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
         .work-log-who {
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--primary);
         }
         
         .work-log-time {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-        
-        .work-log-content {
-            font-size: 14px;
-            color: var(--text-primary);
-            line-height: 1.5;
-        }
-        
-        /* 统计图表 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        
-        .stat-box {
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 16px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 4px;
-        }
-        
-        .stat-label {
             font-size: 13px;
-            color: var(--text-light);
+            color: var(--text-secondary);
         }
         
-        .priority-high {
-            border-left-color: var(--danger);
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 8px;
         }
         
-        .priority-medium {
-            border-left-color: var(--warning);
+        .badge-category {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--secondary);
         }
         
-        .priority-low {
-            border-left-color: var(--success);
+        .badge-status {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
         }
+        
+        /* 隐藏非当前语言的内容 */
+        [data-lang] { display: none; }
+        [data-lang="zh"].active-lang { display: block; }
+        [data-lang="en"].active-lang { display: block; }
+        
+        .inline-lang[data-lang] { display: none; }
+        .inline-lang[data-lang="zh"].active-lang { display: inline; }
+        .inline-lang[data-lang="en"].active-lang { display: inline; }
+        
+        /* 列表项双语 */
+        li[data-lang] { display: none; }
+        li[data-lang="zh"].active-lang { display: list-item; }
+        li[data-lang="en"].active-lang { display: list-item; }
     </style>
 </head>
 <body>
+    <div class="bg-animation">
+        <div class="grid-overlay"></div>
+    </div>
+    
+    <!-- 语言切换 -->
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    
     <div class="container">
-        <!-- 头部 -->
-        <div class="header">
-            <h1>
-                <span class="project-icon">🤖</span>
-                生物实验室的灵巧手
-            </h1>
-            <p>机器人解决方案 | 实验室自动化 | 智能操作平台 | 创始团队协作中心</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-badge" data-lang="zh" class="active-lang">🚀 第一期 · 样机开发阶段</div>
+            <div class="hero-badge" data-lang="en" class="active-lang">🚀 Phase 1 · Prototype Development</div>
+            
+            <h1 data-lang="zh" class="active-lang">生物实验室的灵巧手</h1>
+            <h1 data-lang="en" class="active-lang">Bio-Lab Dexterous Robot Hand</h1>
+            
+            <p data-lang="zh" class="active-lang">面向生物实验室自动化场景的机器人解决方案 | 通过灵巧手、机械臂与智能控制系统，提升实验室操作效率与标准化水平</p>
+            <p data-lang="en" class="active-lang">Robotics Solution for Bio-Lab Automation | Enhancing lab efficiency and standardization through dexterous grippers, robotic arms, and intelligent control systems</p>
+        </section>
+        
+        <!-- 图片展示 -->
+        <div class="image-showcase">
+            <div class="showcase-img">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Robot Arm">
+                <div class="showcase-label" data-lang="zh" class="active-lang">🤖 灵巧手原型</div>
+                <div class="showcase-label" data-lang="en" class="active-lang">🤖 Dexterous Gripper Prototype</div>
+            </div>
+            <div class="showcase-img">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80" alt="Laboratory">
+                <div class="showcase-label" data-lang="zh" class="active-lang">🔬 生物实验室场景</div>
+                <div class="showcase-label" data-lang="en" class="active-lang">🔬 Bio-Lab Environment</div>
+            </div>
+            <div class="showcase-img">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Precision Robot">
+                <div class="showcase-label" data-lang="zh" class="active-lang">⚙️ 精密机械系统</div>
+                <div class="showcase-label" data-lang="en" class="active-lang">⚙️ Precision Mechanical System</div>
+            </div>
         </div>
         
-        <!-- 导航标签 -->
+        <!-- 导航 -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('overview')">📊 项目概览</button>
-            <button class="tab-btn" onclick="switchTab('team')">👥 团队分工</button>
-            <button class="tab-btn" onclick="switchTab('progress')">📈 进度追踪</button>
-            <button class="tab-btn" onclick="switchTab('tasks')">✅ 任务管理</button>
-            <button class="tab-btn" onclick="switchTab('worklog')">📝 工作记录</button>
+            <button class="tab-btn active" onclick="switchTab('overview')">
+                <span data-lang="zh" class="active-lang">📊 项目概览</span>
+                <span data-lang="en" class="active-lang">📊 Overview</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('team')">
+                <span data-lang="zh" class="active-lang">👥 团队</span>
+                <span data-lang="en" class="active-lang">👥 Team</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('progress')">
+                <span data-lang="zh" class="active-lang">📈 进度</span>
+                <span data-lang="en" class="active-lang">📈 Progress</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('tasks')">
+                <span data-lang="zh" class="active-lang">✅ 任务</span>
+                <span data-lang="en" class="active-lang">✅ Tasks</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('worklog')">
+                <span data-lang="zh" class="active-lang">📝 记录</span>
+                <span data-lang="en" class="active-lang">📝 Logs</span>
+            </button>
         </div>
         
         <!-- ========== 项目概览 ========== -->
         <div id="overview" class="tab-content active">
-            <!-- 关键指标 -->
-            <div class="overview-grid">
-                <div class="overview-card">
-                    <h3>项目阶段</h3>
-                    <div class="value">第 1 期</div>
-                    <div class="detail">样机开发与验证阶段</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">45%</div>
+                    <div class="stat-label" data-lang="zh" class="active-lang">项目进度</div>
+                    <div class="stat-label" data-lang="en" class="active-lang">Progress</div>
                 </div>
-                <div class="overview-card">
-                    <h3>核心团队</h3>
-                    <div class="value">5+</div>
-                    <div class="detail">CTO、Marketing、BD、CEO 等</div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label" data-lang="zh" class="active-lang">核心成员</div>
+                    <div class="stat-label" data-lang="en" class="active-lang">Team Members</div>
                 </div>
-                <div class="overview-card">
-                    <h3>关键交付</h3>
-                    <div class="value">7</div>
-                    <div class="detail">产品、宣传、合作等重点项目</div>
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label" data-lang="zh" class="active-lang">优先任务</div>
+                    <div class="stat-label" data-lang="en" class="active-lang">Priority Tasks</div>
                 </div>
-                <div class="overview-card">
-                    <h3>首批案例</h3>
-                    <div class="value">1</div>
-                    <div class="detail">移液/抓取/转移自动化</div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label" data-lang="zh" class="active-lang">周目标周期</div>
+                    <div class="stat-label" data-lang="en" class="active-lang">Week Target</div>
                 </div>
             </div>
             
-            <!-- 项目说明 -->
             <div class="card">
-                <h2>🎯 项目定位与原则</h2>
-                <div style="line-height: 1.8; color: #475569;">
-                    <p style="margin-bottom: 16px;">
-                        <strong>"生物实验室的灵巧手"</strong>是面向生物实验室自动化的机器人解决方案，通过灵巧手、机械臂与自动化控制系统的结合，提升实验室操作效率和标准化水平。
-                    </p>
-                    <p style="margin-bottom: 16px;"><strong>第一期优先原则：</strong></p>
-                    <ul style="margin-left: 24px; margin-bottom: 16px;">
-                        <li>✓ 聚焦可落地、可验证、可收费的应用场景</li>
-                        <li>✓ 优先完成真实场景的样机开发与功能验证</li>
-                        <li>✓ 先形成收入闭环，再逐步拓展技术方向</li>
-                        <li>✓ 不追求初期覆盖全部复杂需求</li>
-                    </ul>
-                    <p><strong>三步工作法：</strong>先做出可用案例 → 形成收入闭环 → 持续升级与拓展</p>
-                </div>
+                <h2>
+                    <span class="icon">🎯</span>
+                    <span data-lang="zh" class="active-lang">项目定位与原则</span>
+                    <span data-lang="en" class="active-lang">Project Vision & Principles</span>
+                </h2>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;" data-lang="zh" class="active-lang">
+                    "生物实验室的灵巧手"聚焦实验流程中高频、重复、对精度要求高的关键操作环节，通过灵巧手、机械臂与自动化控制系统的结合，提升实验室操作效率和标准化水平。
+                </p>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;" data-lang="en" class="active-lang">
+                    The "Bio-Lab Dexterous Robot Hand" focuses on high-frequency, repetitive operations requiring precision in lab workflows. By combining dexterous grippers, robotic arms, and automated control systems, we enhance lab efficiency and standardization.
+                </p>
+                
+                <h4 data-lang="zh" class="active-lang" style="margin-bottom: 12px;">第一期优先原则 Phase 1 Priorities:</h4>
+                <h4 data-lang="en" class="active-lang" style="margin-bottom: 12px;">第一期优先原则 Phase 1 Priorities:</h4>
+                <ul style="margin-left: 24px; color: var(--text-secondary); line-height: 2;">
+                    <li data-lang="zh" class="active-lang">✓ 聚焦可落地、可验证、可收费的应用场景</li>
+                    <li data-lang="zh" class="active-lang">✓ 优先完成真实场景的样机开发与功能验证</li>
+                    <li data-lang="zh" class="active-lang">✓ 先形成收入闭环，再逐步拓展技术方向</li>
+                    <li data-lang="en" class="active-lang">✓ Focus on deliverable, verifiable, and billable scenarios</li>
+                    <li data-lang="en" class="active-lang">✓ Prioritize prototype development and function verification</li>
+                    <li data-lang="en" class="active-lang">✓ Establish revenue loop first, then expand technology</li>
+                </ul>
             </div>
             
-            <!-- 第一期案例说明 -->
-            <div class="card" style="margin-top: 20px;">
-                <h2>🔬 第一期案例与技术方向</h2>
-                <div style="line-height: 1.8; color: #475569;">
-                    <p style="margin-bottom: 16px;"><strong>核心切入点：</strong>实验室中的移液、抓取、挤压、转移动作自动化</p>
-                    <p style="margin-bottom: 16px;"><strong>第一期目标范围：</strong></p>
-                    <ul style="margin-left: 24px; margin-bottom: 16px;">
-                        <li>指定实验器具的识别、抓取与放置</li>
-                        <li>指定容器或样本的稳定转移</li>
-                        <li>挤压类、按压类基础动作执行</li>
-                        <li>与实验台现有工具和空间环境的适配</li>
-                        <li>基础重复性测试和误差控制</li>
-                    </ul>
-                    <p style="margin-bottom: 16px;"><strong>关键技术重点：</strong></p>
-                    <ul style="margin-left: 24px;">
-                        <li>实验室线下调研与需求确认</li>
-                        <li>末端执行器设计与稳定性验证</li>
-                        <li>精度与重复执行一致性控制</li>
-                        <li>原型快速迭代（1-2 个月内可用）</li>
-                        <li>实验台适配与流程集成</li>
-                    </ul>
-                </div>
+            <div class="card">
+                <h2>
+                    <span class="icon">🔬</span>
+                    <span data-lang="zh" class="active-lang">第一期案例与技术方向</span>
+                    <span data-lang="en" class="active-lang">Phase 1 Cases & Tech Direction</span>
+                </h2>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh" class="active-lang"><strong>核心切入点：</strong>实验室移液、抓取、挤压、转移自动化</p>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en" class="active-lang"><strong>Core Focus:</strong> Lab pipetting, grasping, squeezing, and transfer automation</p>
+                
+                <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh" class="active-lang"><strong>技术重点：</strong></p>
+                <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en" class="active-lang"><strong>Technical Focus:</strong></p>
+                <ul style="margin-left: 24px; color: var(--text-secondary); line-height: 2;">
+                    <li data-lang="zh" class="active-lang">实验室线下调研与需求确认</li>
+                    <li data-lang="zh" class="active-lang">末端执行器设计与稳定性验证</li>
+                    <li data-lang="zh" class="active-lang">精度与重复执行一致性控制</li>
+                    <li data-lang="zh" class="active-lang">原型快速迭代（1-2个月内可用）</li>
+                    <li data-lang="en" class="active-lang">On-site lab research and requirement confirmation</li>
+                    <li data-lang="en" class="active-lang">End-effector design and stability verification</li>
+                    <li data-lang="en" class="active-lang">Precision and repeatability control</li>
+                    <li data-lang="en" class="active-lang">Rapid prototype iteration (usable in 1-2 months)</li>
+                </ul>
             </div>
             
-            <!-- 商业与 IP -->
-            <div class="card" style="margin-top: 20px;">
-                <h2>💰 商业化与知识产权</h2>
-                <div style="line-height: 1.8; color: #475569;">
-                    <p style="margin-bottom: 16px;"><strong>第一期收入模式：</strong></p>
-                    <ul style="margin-left: 24px; margin-bottom: 16px;">
-                        <li>实验室自动化项目开发收入</li>
-                        <li>定制化设备或模块交付收入</li>
-                        <li>后续维护、维修与升级服务收入</li>
-                        <li>暑期研究项目与实习计划相关收入</li>
-                    </ul>
-                    <p style="margin-bottom: 16px;"><strong>知识产权布局：</strong></p>
-                    <ul style="margin-left: 24px;">
-                        <li>灵巧手结构设计、末端执行器方案的专利评估与申请</li>
-                        <li>样机成熟后分阶段推进专利申请</li>
-                        <li>技术资料、图纸、流程方案的统一保密管理</li>
-                        <li>合作前优先签署保密协议与框架合作协议</li>
-                    </ul>
+            <div class="card">
+                <h2>
+                    <span class="icon">💰</span>
+                    <span data-lang="zh" class="active-lang">商业化与知识产权</span>
+                    <span data-lang="en" class="active-lang">Business & IP Strategy</span>
+                </h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="background: var(--glass); padding: 20px; border-radius: 12px;">
+                        <h4 data-lang="zh" class="active-lang" style="margin-bottom: 12px; color: var(--success);">💰 收入模式</h4>
+                        <h4 data-lang="en" class="active-lang" style="margin-bottom: 12px; color: var(--success);">💰 Revenue Model</h4>
+                        <ul style="color: var(--text-secondary); line-height: 2; font-size: 14px;">
+                            <li data-lang="zh" class="active-lang">实验室自动化项目开发</li>
+                            <li data-lang="zh" class="active-lang">定制化设备/模块交付</li>
+                            <li data-lang="zh" class="active-lang">维护、维修与升级服务</li>
+                            <li data-lang="zh" class="active-lang">暑期研究项目收入</li>
+                            <li data-lang="en" class="active-lang">Lab automation projects</li>
+                            <li data-lang="en" class="active-lang">Custom equipment delivery</li>
+                            <li data-lang="en" class="active-lang">Maintenance & upgrade services</li>
+                            <li data-lang="en" class="active-lang">Summer research program revenue</li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--glass); padding: 20px; border-radius: 12px;">
+                        <h4 data-lang="zh" class="active-lang" style="margin-bottom: 12px; color: var(--secondary);">🔐 知识产权</h4>
+                        <h4 data-lang="en" class="active-lang" style="margin-bottom: 12px; color: var(--secondary);">🔐 IP Protection</h4>
+                        <ul style="color: var(--text-secondary); line-height: 2; font-size: 14px;">
+                            <li data-lang="zh" class="active-lang">灵巧手结构专利申请</li>
+                            <li data-lang="zh" class="active-lang">末端执行器方案保护</li>
+                            <li data-lang="zh" class="active-lang">技术资料保密管理</li>
+                            <li data-lang="zh" class="active-lang">合作保密协议签署</li>
+                            <li data-lang="en" class="active-lang">Gripper structure patents</li>
+                            <li data-lang="en" class="active-lang">End-effector IP protection</li>
+                            <li data-lang="en" class="active-lang">Technical documentation security</li>
+                            <li data-lang="en" class="active-lang">NDA and cooperation agreements</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- ========== 团队分工 ========== -->
+        <!-- ========== 团队 ========== -->
         <div id="team" class="tab-content">
-            <div class="main-grid">
-                <!-- 团队名单 -->
-                <div class="card">
-                    <h2>👥 创始团队成员</h2>
-                    
-                    <div class="team-member">
-                        <div class="member-info">
-                            <div class="member-avatar" style="background: linear-gradient(135deg, #2563eb, #0ea5e9);">凯</div>
-                            <div class="member-details">
-                                <h4>凯哥</h4>
-                                <div class="member-role">CTO - 技术研发负责人</div>
-                            </div>
-                        </div>
-                        <div class="member-status status-active">在线</div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <div class="member-info">
-                            <div class="member-avatar" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">A</div>
-                            <div class="member-details">
-                                <h4>Angela</h4>
-                                <div class="member-role">Marketing - 品牌与宣传</div>
-                            </div>
-                        </div>
-                        <div class="member-status status-active">在线</div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <div class="member-info">
-                            <div class="member-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">Y</div>
-                            <div class="member-details">
-                                <h4>Yin</h4>
-                                <div class="member-role">BD 负责人 - 合作拓展</div>
-                            </div>
-                        </div>
-                        <div class="member-status status-active">在线</div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <div class="member-info">
-                            <div class="member-avatar" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">Z</div>
-                            <div class="member-details">
-                                <h4>ZeZe</h4>
-                                <div class="member-role">技术支持 - 实验室调研</div>
-                            </div>
-                        </div>
-                        <div class="member-status status-active">在线</div>
-                    </div>
-                    
-                    <div class="team-member">
-                        <div class="member-info">
-                            <div class="member-avatar" style="background: linear-gradient(135deg, #8b5cf6, #a855f7);">AE</div>
-                            <div class="member-details">
-                                <h4>Angell</h4>
-                                <div class="member-role">CEO - 项目统筹与战略</div>
-                            </div>
-                        </div>
-                        <div class="member-status status-active">在线</div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar" style="background: linear-gradient(135deg, #0ea5e9, #06b6d4);">凯</div>
+                    <div class="member-info">
+                        <h4>凯哥 Kai</h4>
+                        <div class="member-role">CTO · 技术研发</div>
+                        <div class="member-desc" data-lang="zh" class="active-lang">原型设计、机械结构、控制实现、测试迭代</div>
+                        <div class="member-desc" data-lang="en" class="active-lang">Prototype, Mechanics, Control, Testing</div>
                     </div>
                 </div>
                 
-                <!-- 分工详解 -->
-                <div class="card">
-                    <h2>🎯 核心分工职责</h2>
-                    
-                    <div style="line-height: 1.8; color: #475569; font-size: 14px;">
-                        <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0;">
-                            <div style="font-weight: 600; color: #2563eb; margin-bottom: 8px;">🔧 凯哥 (CTO)</div>
-                            <p>技术研发、原型设计、机械结构与控制实现、测试迭代、整体技术路线把控</p>
-                        </div>
-                        
-                        <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0;">
-                            <div style="font-weight: 600; color: #ec4899; margin-bottom: 8px;">📱 Angela (Marketing)</div>
-                            <p>网站建设、媒体内容、项目包装、品牌展示、对外宣传、社交媒体运营</p>
-                        </div>
-                        
-                        <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0;">
-                            <div style="font-weight: 600; color: #10b981; margin-bottom: 8px;">🤝 Yin (BD 负责人)</div>
-                            <p>实习生计划、高校合作、医院合作、外部资源拓展、暑期研究项目启动</p>
-                        </div>
-                        
-                        <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0;">
-                            <div style="font-weight: 600; color: #f59e0b; margin-bottom: 8px;">🔍 ZeZe (技术支持)</div>
-                            <p>实验室线下调研、需求确认、动作流程分析、空间适配评估</p>
-                        </div>
-                        
-                        <div style="margin-bottom: 0;">
-                            <div style="font-weight: 600; color: #8b5cf6; margin-bottom: 8px;">🎯 Angell (CEO)</div>
-                            <p>项目整体统筹、资源整合、战略推进、关键合作协调、专利与 IP 规划</p>
-                        </div>
+                <div class="team-member">
+                    <div class="member-avatar" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">A</div>
+                    <div class="member-info">
+                        <h4>Angela</h4>
+                        <div class="member-role">Marketing · 市场营销</div>
+                        <div class="member-desc" data-lang="zh" class="active-lang">网站建设、品牌宣传、社交媒体运营</div>
+                        <div class="member-desc" data-lang="en" class="active-lang">Website, Branding, Social Media</div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">Y</div>
+                    <div class="member-info">
+                        <h4>Yin</h4>
+                        <div class="member-role">BD · 商务拓展</div>
+                        <div class="member-desc" data-lang="zh" class="active-lang">高校合作、医院合作、暑期项目</div>
+                        <div class="member-desc" data-lang="en" class="active-lang">University/Hospital Partnership, Summer Program</div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">Z</div>
+                    <div class="member-info">
+                        <h4>ZeZe</h4>
+                        <div class="member-role">技术支持 · Tech Support</div>
+                        <div class="member-desc" data-lang="zh" class="active-lang">实验室调研、需求分析、空间适配</div>
+                        <div class="member-desc" data-lang="en" class="active-lang">Lab Research, Requirements, Space Planning</div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar" style="background: linear-gradient(135deg, #8b5cf6, #a855f7);">AE</div>
+                    <div class="member-info">
+                        <h4>Angell</h4>
+                        <div class="member-role">CEO · 首席执行官</div>
+                        <div class="member-desc" data-lang="zh" class="active-lang">项目统筹、战略推进、资源整合</div>
+                        <div class="member-desc" data-lang="en" class="active-lang">Strategy, Coordination, Resource Integration</div>
                     </div>
                 </div>
             </div>
             
-            <!-- 暑期研究项目说明 -->
-            <div class="card" style="margin-top: 20px;">
-                <h2>🎓 斯坦福暑期高中生研究项目</h2>
-                <div style="line-height: 1.8; color: #475569;">
-                    <p style="margin-bottom: 16px;"><strong>项目目标：</strong></p>
-                    <ul style="margin-left: 24px; margin-bottom: 16px;">
-                        <li>招募优秀高中生参与项目辅助工作与实验室相关工作</li>
-                        <li>为学生提供真实科研与工程项目的训练机会</li>
-                        <li>建立早期人才观察与培养机制</li>
-                        <li>支持优秀学生的论文发表与成果展示</li>
-                    </ul>
-                    <p><strong>预期效果：</strong>项目推进 + 人才培养 + 品牌声誉 + 初期收入的多维结合</p>
-                </div>
+            <div class="card" style="margin-top: 24px;">
+                <h2>
+                    <span class="icon">🎓</span>
+                    <span data-lang="zh" class="active-lang">斯坦福暑期高中生研究项目</span>
+                    <span data-lang="en" class="active-lang">Stanford Summer HS Research Program</span>
+                </h2>
+                <p style="color: var(--text-secondary); line-height: 1.8;" data-lang="zh" class="active-lang">
+                    面向优秀高中生开放参与机会，让学生在真实科研与工程项目中获得训练，为项目建立早期人才观察与培养机制，支持优秀学生参与论文发表。
+                </p>
+                <p style="color: var(--text-secondary); line-height: 1.8;" data-lang="en" class="active-lang">
+                    Open to outstanding high school students, providing hands-on experience in real research and engineering projects. Building early talent pipeline and supporting student paper publications.
+                </p>
             </div>
         </div>
         
-        <!-- ========== 进度追踪 ========== -->
+        <!-- ========== 进度 ========== -->
         <div id="progress" class="tab-content">
-            <!-- 进度指标 -->
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-number">45%</div>
-                    <div class="stat-label">整体项目进度</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">7/15</div>
-                    <div class="stat-label">关键任务完成</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">5/5</div>
-                    <div class="stat-label">团队人员配置</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">8w</div>
-                    <div class="stat-label">第一期目标周期</div>
-                </div>
-            </div>
-            
-            <!-- 阶段路线 -->
             <div class="card">
-                <h2>📅 项目里程碑与时间线</h2>
+                <h2>
+                    <span class="icon">📅</span>
+                    <span data-lang="zh" class="active-lang">里程碑时间线</span>
+                    <span data-lang="en" class="active-lang">Project Milestones</span>
+                </h2>
+                
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-date">第 1-2 周 (紧急)</div>
-                        <div class="timeline-title">🚀 启动与基础建设</div>
-                        <div class="timeline-desc">公司起名、官方账号注册、网站搭建启动、团队初次协调会</div>
+                        <div class="timeline-date" data-lang="zh" class="active-lang">第 1-2 周</div>
+                        <div class="timeline-date" data-lang="en" class="active-lang">Week 1-2</div>
+                        <div class="timeline-title" data-lang="zh" class="active-lang">🚀 启动与基础建设</div>
+                        <div class="timeline-title" data-lang="en" class="active-lang">🚀 Launch & Foundation</div>
+                        <div class="timeline-desc" data-lang="zh" class="active-lang">公司起名、官方账号注册、网站搭建、团队初次协调会</div>
+                        <div class="timeline-desc" data-lang="en" class="active-lang">Company naming, official accounts, website setup, kickoff meeting</div>
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="timeline-date">第 3-4 周</div>
-                        <div class="timeline-title">🔬 调研与需求确认</div>
-                        <div class="timeline-desc">完成实验室场景调研、明确第一期案例需求、初步技术方案评估</div>
+                        <div class="timeline-date" data-lang="zh" class="active-lang">第 3-4 周</div>
+                        <div class="timeline-date" data-lang="en" class="active-lang">Week 3-4</div>
+                        <div class="timeline-title" data-lang="zh" class="active-lang">🔬 调研与需求确认</div>
+                        <div class="timeline-title" data-lang="en" class="active-lang">🔬 Research & Requirements</div>
+                        <div class="timeline-desc" data-lang="zh" class="active-lang">实验室场景调研、明确第一期案例需求、技术方案评估</div>
+                        <div class="timeline-desc" data-lang="en" class="active-lang">Lab research, Phase 1 requirements, tech evaluation</div>
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="timeline-date">第 5-8 周</div>
-                        <div class="timeline-title">⚙️ 原型设计与迭代</div>
-                        <div class="timeline-desc">灵巧手/机械臂原型设计、首版制造、功能测试、多轮优化</div>
+                        <div class="timeline-date" data-lang="zh" class="active-lang">第 5-8 周</div>
+                        <div class="timeline-date" data-lang="en" class="active-lang">Week 5-8</div>
+                        <div class="timeline-title" data-lang="zh" class="active-lang">⚙️ 原型设计与迭代</div>
+                        <div class="timeline-title" data-lang="en" class="active-lang">⚙️ Prototype & Iteration</div>
+                        <div class="timeline-desc" data-lang="zh" class="active-lang">灵巧手/机械臂原型设计、首版制造、功能测试、多轮优化</div>
+                        <div class="timeline-desc" data-lang="en" class="active-lang">Gripper/robot prototype design, manufacturing, testing, optimization</div>
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="timeline-date">第 9-10 周</div>
-                        <div class="timeline-title">📸 验证与展示</div>
-                        <div class="timeline-desc">完整功能测试、案例文档、宣传素材、客户初步反馈</div>
+                        <div class="timeline-date" data-lang="zh" class="active-lang">第 9-10 周</div>
+                        <div class="timeline-date" data-lang="en" class="active-lang">Week 9-10</div>
+                        <div class="timeline-title" data-lang="zh" class="active-lang">📸 验证与展示</div>
+                        <div class="timeline-title" data-lang="en" class="active-lang">📸 Verification & Demo</div>
+                        <div class="timeline-desc" data-lang="zh" class="active-lang">完整功能测试、案例文档、宣传素材、客户反馈</div>
+                        <div class="timeline-desc" data-lang="en" class="active-lang">Full testing, documentation, marketing materials, client feedback</div>
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="timeline-date">第 11-12 周</div>
-                        <div class="timeline-title">💼 商业化启动</div>
-                        <div class="timeline-desc">首批合作协议、暑期实习计划上线、专利申请启动</div>
+                        <div class="timeline-date" data-lang="zh" class="active-lang">第 11-12 周</div>
+                        <div class="timeline-date" data-lang="en" class="active-lang">Week 11-12</div>
+                        <div class="timeline-title" data-lang="zh" class="active-lang">💼 商业化启动</div>
+                        <div class="timeline-title" data-lang="en" class="active-lang">💼 Commercialization</div>
+                        <div class="timeline-desc" data-lang="zh" class="active-lang">合作协议签署、暑期实习计划上线、专利申请启动</div>
+                        <div class="timeline-desc" data-lang="en" class="active-lang">Cooperation agreements, summer program launch, patent filing</div>
                     </div>
                 </div>
             </div>
             
-            <!-- 当前推进重点 -->
-            <div class="card" style="margin-top: 20px;">
-                <h2>⚡ 当前阶段 - 启动优先事项</h2>
+            <div class="card">
+                <h2>
+                    <span class="icon">⚡</span>
+                    <span data-lang="zh" class="active-lang">当前优先事项</span>
+                    <span data-lang="en" class="active-lang">Current Priorities</span>
+                </h2>
                 
-                <div class="task-item priority-high" style="cursor: default;">
+                <div class="task-card high">
                     <div class="task-header">
-                        <div class="task-title">🎨 确定公司名称与品牌 VI</div>
-                        <div class="task-owner">全体</div>
+                        <div class="task-title" data-lang="zh" class="active-lang">🎨 确定公司名称与品牌 VI</div>
+                        <div class="task-title" data-lang="en" class="active-lang">🎨 Company Naming & Brand VI</div>
+                        <span class="task-owner">全员 All</span>
                     </div>
-                    <div class="task-progress">
-                        <div class="task-progress-bar" style="width: 20%;"></div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div>
+                    <div style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);">
+                        <span data-lang="zh" class="active-lang">协调: Angell | 周期: 1周</span>
+                        <span data-lang="en" class="active-lang">Coordinator: Angell | Duration: 1 week</span>
                     </div>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">预期周期: 1 周 | 优先级: 🔴 高 | 负责协调: Angell</div>
                 </div>
                 
-                <div class="task-item priority-high" style="cursor: default; margin-top: 16px;">
+                <div class="task-card high">
                     <div class="task-header">
-                        <div class="task-title">🌐 网站建设与官方账号注册</div>
-                        <div class="task-owner">Angela</div>
+                        <div class="task-title" data-lang="zh" class="active-lang">🌐 网站建设与官方账号</div>
+                        <div class="task-title" data-lang="en" class="active-lang">🌐 Website & Official Accounts</div>
+                        <span class="task-owner">Angela</span>
                     </div>
-                    <div class="task-progress">
-                        <div class="task-progress-bar" style="width: 30%;"></div>
-                    </div>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">预期周期: 2-3 周 | 优先级: 🔴 高 | 包含: 官网、LinkedIn、邮箱等</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 30%;"></div></div>
                 </div>
                 
-                <div class="task-item priority-high" style="cursor: default; margin-top: 16px;">
+                <div class="task-card high">
                     <div class="task-header">
-                        <div class="task-title">🔍 实验室场景线下调研</div>
-                        <div class="task-owner">凯哥 / ZeZe</div>
+                        <div class="task-title" data-lang="zh" class="active-lang">🔍 实验室场景线下调研</div>
+                        <div class="task-title" data-lang="en" class="active-lang">🔍 On-site Lab Research</div>
+                        <span class="task-owner">凯哥/ZeZe</span>
                     </div>
-                    <div class="task-progress">
-                        <div class="task-progress-bar" style="width: 25%;"></div>
-                    </div>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">预期周期: 2 周 | 优先级: 🔴 高 | 交付: 详细需求文档与图纸</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
                 </div>
                 
-                <div class="task-item priority-high" style="cursor: default; margin-top: 16px;">
+                <div class="task-card high">
                     <div class="task-header">
-                        <div class="task-title">🤖 第一代灵巧手/机械臂原型设计</div>
-                        <div class="task-owner">凯哥</div>
+                        <div class="task-title" data-lang="zh" class="active-lang">🤖 第一代原型设计</div>
+                        <div class="task-title" data-lang="en" class="active-lang">🤖 Phase 1 Prototype Design</div>
+                        <span class="task-owner">凯哥</span>
                     </div>
-                    <div class="task-progress">
-                        <div class="task-progress-bar" style="width: 15%;"></div>
-                    </div>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">预期周期: 4-6 周 | 优先级: 🔴 高 | 基于调研结果启动</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 15%;"></div></div>
                 </div>
                 
-                <div class="task-item priority-medium" style="cursor: default; margin-top: 16px;">
+                <div class="task-card medium">
                     <div class="task-header">
-                        <div class="task-title">📋 公司注册与合作框架准备</div>
-                        <div class="task-owner">Angell</div>
+                        <div class="task-title" data-lang="zh" class="active-lang">📋 公司注册与合作框架</div>
+                        <div class="task-title" data-lang="en" class="active-lang">📋 Company Registration & Framework</div>
+                        <span class="task-owner">Angell</span>
                     </div>
-                    <div class="task-progress">
-                        <div class="task-progress-bar" style="width: 40%;"></div>
-                    </div>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">预期周期: 2-3 周 | 优先级: 🟡 中 | 包含: 注册、框架协议、IP 保护条款</div>
-                </div>
-                
-                <div class="task-item priority-medium" style="cursor: default; margin-top: 16px;">
-                    <div class="task-header">
-                        <div class="task-title">🎓 暑期斯坦福高中生研究项目启动</div>
-                        <div class="task-owner">Yin</div>
-                    </div>
-                    <div class="task-progress">
-                        <div class="task-progress-bar" style="width: 35%;"></div>
-                    </div>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">预期周期: 3 周 | 优先级: 🟡 中 | 交付: 招聘启事、项目说明书</div>
-                </div>
-                
-                <div class="task-item priority-low" style="cursor: default; margin-top: 16px;">
-                    <div class="task-header">
-                        <div class="task-title">🔐 专利申请与技术保密体系规划</div>
-                        <div class="task-owner">Angell</div>
-                    </div>
-                    <div class="task-progress">
-                        <div class="task-progress-bar" style="width: 20%;"></div>
-                    </div>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">预期周期: 2 周 | 优先级: 🟢 低 | 配合 CEO 工作</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
                 </div>
             </div>
         </div>
@@ -860,84 +984,93 @@
         <!-- ========== 任务管理 ========== -->
         <div id="tasks" class="tab-content">
             <div class="form-section">
-                <h3>✨ 提交你的工作内容与进展</h3>
-                <p style="color: #64748b; margin-bottom: 20px; font-size: 14px;">
-                    每位团队成员可以在这里输入自己本周的工作内容、遇到的问题、需要的支持，帮助团队保持同步。
-                </p>
+                <h3 style="margin-bottom: 24px;" data-lang="zh" class="active-lang">✨ 提交你的工作内容与进展</h3>
+                <h3 style="margin-bottom: 24px;" data-lang="en" class="active-lang">✨ Submit Your Work Progress</h3>
                 
                 <form id="taskForm" onsubmit="submitTask(event)">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="member">👤 你是谁?</label>
+                            <label data-lang="zh" class="active-lang">👤 你是谁?</label>
+                            <label data-lang="en" class="active-lang">👤 Your Name</label>
                             <select id="member" required>
-                                <option value="">-- 请选择 --</option>
-                                <option value="凯哥">凯哥 (CTO)</option>
-                                <option value="Angela">Angela (Marketing)</option>
-                                <option value="Yin">Yin (BD)</option>
-                                <option value="ZeZe">ZeZe (技术支持)</option>
+                                <option value="">-- Select / 选择 --</option>
+                                <option value="凯哥">凯哥 Kai (CTO)</option>
+                                <option value="Angela">Angela</option>
+                                <option value="Yin">Yin</option>
+                                <option value="ZeZe">ZeZe</option>
                                 <option value="Angell">Angell (CEO)</option>
-                                <option value="其他">其他</option>
+                                <option value="其他">其他 Other</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="category">📂 工作分类</label>
+                            <label data-lang="zh" class="active-lang">📂 工作分类</label>
+                            <label data-lang="en" class="active-lang">📂 Category</label>
                             <select id="category" required>
-                                <option value="">-- 请选择 --</option>
-                                <option value="技术研发">技术研发</option>
-                                <option value="市场宣传">市场宣传</option>
-                                <option value="商务合作">商务合作</option>
-                                <option value="调研评估">调研评估</option>
-                                <option value="行政管理">行政管理</option>
-                                <option value="其他">其他</option>
+                                <option value="">-- Select / 选择 --</option>
+                                <option value="技术研发">技术研发 Tech</option>
+                                <option value="市场宣传">市场宣传 Marketing</option>
+                                <option value="商务合作">商务合作 BD</option>
+                                <option value="调研评估">调研评估 Research</option>
+                                <option value="行政管理">行政管理 Admin</option>
                             </select>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="title">📌 任务/进展标题</label>
-                        <input type="text" id="title" placeholder="例如: 完成实验室初步调研、网站首页设计、BD 合作洽谈" required>
+                        <label data-lang="zh" class="active-lang">📌 任务/进展标题</label>
+                        <label data-lang="en" class="active-lang">📌 Task Title</label>
+                        <input type="text" id="title" placeholder="e.g. 完成实验室调研 / Completed lab research" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="description">📝 详细描述</label>
-                        <textarea id="description" placeholder="描述你完成了什么、目前进度、遇到的问题、需要的帮助等。尽量具体和可操作。" required></textarea>
+                        <label data-lang="zh" class="active-lang">📝 详细描述</label>
+                        <label data-lang="en" class="active-lang">📝 Description</label>
+                        <textarea id="description" placeholder="Describe your progress, completed work, issues, needed help..." required></textarea>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="status">✅ 完成度</label>
+                            <label data-lang="zh" class="active-lang">✅ 完成度</label>
+                            <label data-lang="en" class="active-lang">✅ Status</label>
                             <select id="status" required>
-                                <option value="计划中">计划中 (0-20%)</option>
-                                <option value="进行中">进行中 (20-80%)</option>
-                                <option value="即将完成">即将完成 (80-99%)</option>
-                                <option value="已完成">已完成 (100%)</option>
+                                <option value="计划中">计划中 Planning</option>
+                                <option value="进行中">进行中 In Progress</option>
+                                <option value="即将完成">即将完成 Almost Done</option>
+                                <option value="已完成">已完成 Completed</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="dueDate">📅 预期完成日期</label>
+                            <label data-lang="zh" class="active-lang">📅 预期完成</label>
+                            <label data-lang="en" class="active-lang">📅 Due Date</label>
                             <input type="date" id="dueDate" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="needsHelp">🆘 需要的支持 (可选)</label>
-                        <textarea id="needsHelp" placeholder="如果有卡住的地方或需要其他团队成员帮助，请在这里说明。"></textarea>
+                        <label data-lang="zh" class="active-lang">🆘 需要的支持 (可选)</label>
+                        <label data-lang="en" class="active-lang">🆘 Needed Help (Optional)</label>
+                        <textarea id="needsHelp" placeholder="Any blockers or support needed?"></textarea>
                     </div>
                     
-                    <button type="submit" class="button button-primary" style="width: 100%;">
-                        🚀 提交工作进展
+                    <button type="submit" class="btn-primary">
+                        <span data-lang="zh" class="active-lang">🚀 提交工作进展</span>
+                        <span data-lang="en" class="active-lang">🚀 Submit Progress</span>
                     </button>
                 </form>
             </div>
             
-            <!-- 工作日志展示 -->
             <div class="card">
-                <h2>📋 团队工作进度日志</h2>
-                <div id="worklogContainer" style="margin-top: 0;">
-                    <p style="color: #94a3b8; text-align: center; padding: 40px 20px;">
-                        暂无工作记录。提交第一条进展吧！
+                <h2>
+                    <span class="icon">📋</span>
+                    <span data-lang="zh" class="active-lang">团队工作进度日志</span>
+                    <span data-lang="en" class="active-lang">📋 Team Progress Log</span>
+                </h2>
+                <div id="worklogContainer">
+                    <p style="color: var(--text-secondary); text-align: center; padding: 40px;">
+                        <span data-lang="zh" class="active-lang">暂无工作记录。提交第一条进展吧！</span>
+                        <span data-lang="en" class="active-lang">No work logs yet. Submit your first progress!</span>
                     </p>
                 </div>
             </div>
@@ -946,62 +1079,81 @@
         <!-- ========== 工作记录 ========== -->
         <div id="worklog" class="tab-content">
             <div class="card">
-                <h2>📊 工作记录档案</h2>
-                <p style="color: #64748b; margin-bottom: 24px; font-size: 14px;">
-                    这里展示整个团队的工作进展轨迹，帮助大家了解项目推进情况、发现瓶颈、协调资源。
-                </p>
-                
-                <div id="allWorklogs" style="margin-top: 0;">
-                    <p style="color: #94a3b8; text-align: center; padding: 40px 20px;">
-                        暂无工作记录。请在「任务管理」页面提交。
+                <h2>
+                    <span class="icon">📊</span>
+                    <span data-lang="zh" class="active-lang">工作记录档案</span>
+                    <span data-lang="en" class="active-lang">📊 Work Log Archive</span>
+                </h2>
+                <div id="allWorklogs">
+                    <p style="color: var(--text-secondary); text-align: center; padding: 40px;">
+                        <span data-lang="zh" class="active-lang">暂无工作记录</span>
+                        <span data-lang="en" class="active-lang">No logs yet</span>
                     </p>
                 </div>
             </div>
             
-            <!-- 统计分析 -->
-            <div class="card" style="margin-top: 20px;">
-                <h2>📈 进度统计</h2>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-number" id="totalTasks">0</div>
-                        <div class="stat-label">总任务数</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" id="completedTasks">0</div>
-                        <div class="stat-label">已完成</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" id="inProgressTasks">0</div>
-                        <div class="stat-label">进行中</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" id="pendingTasks">0</div>
-                        <div class="stat-label">计划中</div>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalTasks">0</div>
+                    <div class="stat-label" data-lang="zh" class="active-lang">总任务</div>
+                    <div class="stat-label" data-lang="en" class="active-lang">Total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="completedTasks">0</div>
+                    <div class="stat-label" data-lang="zh" class="active-lang">已完成</div>
+                    <div class="stat-label" data-lang="en" class="active-lang">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="inProgressTasks">0</div>
+                    <div class="stat-label" data-lang="zh" class="active-lang">进行中</div>
+                    <div class="stat-label" data-lang="en" class="active-lang">In Progress</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="pendingTasks">0</div>
+                    <div class="stat-label" data-lang="zh" class="active-lang">计划中</div>
+                    <div class="stat-label" data-lang="en" class="active-lang">Pending</div>
                 </div>
             </div>
         </div>
     </div>
     
     <script>
-        // 初始化本地存储
-        let allTasks = JSON.parse(localStorage.getItem('projectTasks')) || [];
+        let allTasks = JSON.parse(localStorage.getItem('projectTasksV2')) || [];
+        let currentLang = 'zh';
+        
+        // 语言切换
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // 切换所有双语内容
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                el.classList.remove('active-lang');
+                if (el.getAttribute('data-lang') === lang) {
+                    el.classList.add('active-lang');
+                }
+            });
+            
+            // 刷新工作日志
+            updateWorklogDisplay();
+            updateAllWorklogs();
+        }
+        
+        // 初始化语言
+        document.querySelectorAll('[data-lang]').forEach(el => {
+            if (el.getAttribute('data-lang') === 'zh') {
+                el.classList.add('active-lang');
+            }
+        });
         
         // 标签切换
         function switchTab(tabName) {
-            // 隐藏所有标签
-            document.querySelectorAll('.tab-content').forEach(el => {
-                el.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            // 显示选中标签
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+            event.target.closest('.tab-btn').classList.add('active');
             
-            // 刷新工作日志显示
             if (tabName === 'worklog') {
                 updateAllWorklogs();
                 updateStats();
@@ -1025,89 +1177,83 @@
             };
             
             allTasks.push(task);
-            localStorage.setItem('projectTasks', JSON.stringify(allTasks));
+            localStorage.setItem('projectTasksV2', JSON.stringify(allTasks));
             
-            // 刷新显示
             updateWorklogDisplay();
             updateAllWorklogs();
             updateStats();
-            
-            // 清空表单
             document.getElementById('taskForm').reset();
             
-            // 显示成功提示
-            alert('✅ 工作进展已提交！感谢你的更新。');
+            alert(currentLang === 'zh' ? '✅ 提交成功！' : '✅ Submitted successfully!');
         }
         
-        // 更新工作日志显示 (任务管理页)
+        // 工作日志显示
         function updateWorklogDisplay() {
             const container = document.getElementById('worklogContainer');
             
             if (allTasks.length === 0) {
-                container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 40px 20px;">暂无工作记录。提交第一条进展吧！</p>';
+                container.innerHTML = `<p style="color: var(--text-secondary); text-align: center; padding: 40px;">
+                    ${currentLang === 'zh' ? '暂无工作记录。提交第一条进展吧！' : 'No work logs yet. Submit your first progress!'}
+                </p>`;
                 return;
             }
             
-            container.innerHTML = allTasks.map((task, index) => `
+            container.innerHTML = allTasks.slice().reverse().map(task => `
                 <div class="work-log">
                     <div class="work-log-header">
-                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <div>
                             <span class="work-log-who">${task.member}</span>
-                            <span style="background: #e0e7ff; color: #4338ca; padding: 2px 8px; border-radius: 12px; font-size: 12px;">${task.category}</span>
-                            <span style="background: ${getStatusColor(task.status)}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px;">${task.status}</span>
+                            <span class="badge badge-category">${task.category}</span>
+                            <span class="badge badge-status">${task.status}</span>
                         </div>
-                        <div class="work-log-time">${task.timestamp}</div>
+                        <span class="work-log-time">${task.timestamp}</span>
                     </div>
-                    <div class="work-log-content" style="margin-top: 12px;">
+                    <div style="margin-top: 12px;">
                         <strong>📌 ${task.title}</strong>
-                        <p style="margin-top: 8px; line-height: 1.6;">${task.description}</p>
-                        ${task.needsHelp ? `<p style="margin-top: 8px; padding: 10px; background: #fef3c7; border-left: 3px solid #f59e0b; color: #92400e;"><strong>🆘 需要支持:</strong> ${task.needsHelp}</p>` : ''}
-                        <p style="margin-top: 8px; font-size: 12px; color: #64748b;">📅 预期完成: ${task.dueDate}</p>
+                        <p style="margin-top: 8px; color: var(--text-secondary); line-height: 1.6;">${task.description}</p>
+                        ${task.needsHelp ? `<p style="margin-top: 10px; padding: 10px; background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--warning); border-radius: 4px; color: var(--warning); font-size: 14px;"><strong>🆘 ${currentLang === 'zh' ? '需要支持:' : 'Need help:'}</strong> ${task.needsHelp}</p>` : ''}
+                        <p style="margin-top: 8px; font-size: 13px; color: var(--text-secondary);">📅 ${currentLang === 'zh' ? '预期完成:' : 'Due:'} ${task.dueDate}</p>
                     </div>
                 </div>
-            `).reverse().join('');
+            `).join('');
         }
         
-        // 更新所有工作日志 (工作记录页)
+        // 所有工作日志
         function updateAllWorklogs() {
             const container = document.getElementById('allWorklogs');
             
             if (allTasks.length === 0) {
-                container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 40px 20px;">暂无工作记录。请在「任务管理」页面提交。</p>';
+                container.innerHTML = `<p style="color: var(--text-secondary); text-align: center; padding: 40px;">
+                    ${currentLang === 'zh' ? '暂无工作记录' : 'No logs yet'}
+                </p>`;
                 return;
             }
             
-            // 按成员分组
-            const groupedByMember = {};
+            const grouped = {};
             allTasks.forEach(task => {
-                if (!groupedByMember[task.member]) {
-                    groupedByMember[task.member] = [];
-                }
-                groupedByMember[task.member].push(task);
+                if (!grouped[task.member]) grouped[task.member] = [];
+                grouped[task.member].push(task);
             });
             
             let html = '';
-            Object.keys(groupedByMember).forEach(member => {
-                html += `<div style="margin-bottom: 24px; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0;">
-                    <div style="background: #f1f5f9; padding: 12px 16px; font-weight: 600; color: #2563eb; border-bottom: 1px solid #e2e8f0;">
+            Object.keys(grouped).forEach(member => {
+                html += `<div style="margin-bottom: 24px; background: var(--glass); border-radius: 12px; overflow: hidden;">
+                    <div style="padding: 16px; background: rgba(14, 165, 233, 0.1); font-weight: 600; border-bottom: 1px solid var(--glass-border);">
                         👤 ${member}
                     </div>
                     <div style="padding: 16px;">
-                        ${groupedByMember[member].map(task => `
-                            <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0;" ${groupedByMember[member][groupedByMember[member].length - 1] === task ? 'style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;"' : ''}>
-                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                                    <div>
-                                        <strong style="font-size: 15px;">${task.title}</strong>
-                                        <div style="display: flex; gap: 8px; margin-top: 6px;">
-                                            <span style="background: #e0e7ff; color: #4338ca; padding: 3px 8px; border-radius: 12px; font-size: 12px;">${task.category}</span>
-                                            <span style="background: ${getStatusColor(task.status)}; color: white; padding: 3px 8px; border-radius: 12px; font-size: 12px;">${task.status}</span>
-                                        </div>
-                                    </div>
-                                    <div style="font-size: 12px; color: #64748b;">${task.timestamp}</div>
+                        ${grouped[member].map(task => `
+                            <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-border);">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <strong>${task.title}</strong>
+                                    <span style="font-size: 12px; color: var(--text-secondary);">${task.timestamp}</span>
                                 </div>
-                                <p style="line-height: 1.6; color: #475569; margin-top: 8px;">${task.description}</p>
-                                ${task.needsHelp ? `<p style="margin-top: 8px; padding: 10px; background: #fef3c7; border-left: 3px solid #f59e0b; border-radius: 4px; color: #92400e;"><strong>🆘 需要支持:</strong> ${task.needsHelp}</p>` : ''}
-                                <p style="margin-top: 8px; font-size: 12px; color: #64748b;">📅 预期完成: ${task.dueDate}</p>
+                                <div style="margin-bottom: 8px;">
+                                    <span class="badge badge-category">${task.category}</span>
+                                    <span class="badge badge-status">${task.status}</span>
+                                </div>
+                                <p style="font-size: 14px; color: var(--text-secondary);">${task.description}</p>
+                                ${task.needsHelp ? `<p style="margin-top: 8px; font-size: 14px; color: var(--warning);">🆘 ${task.needsHelp}</p>` : ''}
                             </div>
                         `).join('')}
                     </div>
@@ -1117,37 +1263,19 @@
             container.innerHTML = html;
         }
         
-        // 获取状态颜色
-        function getStatusColor(status) {
-            const colors = {
-                '计划中': '#94a3b8',
-                '进行中': '#f59e0b',
-                '即将完成': '#8b5cf6',
-                '已完成': '#10b981'
-            };
-            return colors[status] || '#2563eb';
-        }
-        
-        // 更新统计
+        // 统计
         function updateStats() {
-            const total = allTasks.length;
-            const completed = allTasks.filter(t => t.status === '已完成').length;
-            const inProgress = allTasks.filter(t => t.status === '进行中' || t.status === '即将完成').length;
-            const pending = allTasks.filter(t => t.status === '计划中').length;
-            
-            document.getElementById('totalTasks').textContent = total;
-            document.getElementById('completedTasks').textContent = completed;
-            document.getElementById('inProgressTasks').textContent = inProgress;
-            document.getElementById('pendingTasks').textContent = pending;
+            document.getElementById('totalTasks').textContent = allTasks.length;
+            document.getElementById('completedTasks').textContent = allTasks.filter(t => t.status === '已完成').length;
+            document.getElementById('inProgressTasks').textContent = allTasks.filter(t => t.status === '进行中' || t.status === '即将完成').length;
+            document.getElementById('pendingTasks').textContent = allTasks.filter(t => t.status === '计划中').length;
         }
         
-        // 页面加载时初始化
-        window.addEventListener('load', () => {
-            updateWorklogDisplay();
-        });
-        
-        // 设置默认日期为今天
+        // 默认日期
         document.getElementById('dueDate').valueAsDate = new Date();
+        
+        // 初始化
+        updateWorklogDisplay();
     </script>
 </body>
 </html>
