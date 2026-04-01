@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio-Lab Dexterous Robot Hand | Project Management</title>
+    <title>生物实验室的灵巧手 | Bio-Lab Robot Hand</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --primary: #0ea5e9;
@@ -36,13 +32,10 @@
             overflow-x: hidden;
         }
         
-        /* 动态背景 */
         .bg-animation {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
             overflow: hidden;
         }
@@ -50,10 +43,8 @@
         .bg-animation::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: 
                 radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
@@ -63,10 +54,8 @@
         
         .grid-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background-image: 
                 linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
@@ -74,22 +63,17 @@
         }
         
         @keyframes bgMove {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(2%, 2%) rotate(1deg); }
-            66% { transform: translate(-1%, 1%) rotate(-1deg); }
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(2%, 2%); }
+            66% { transform: translate(-1%, 1%); }
         }
         
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
         
         /* 语言切换 */
         .lang-switch {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 20px; right: 20px;
             z-index: 1000;
             display: flex;
             gap: 8px;
@@ -113,14 +97,10 @@
             border-color: var(--primary);
         }
         
-        .lang-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
+        .lang-btn:hover { background: var(--primary); color: white; }
         
-        /* Hero Section */
+        /* Hero */
         .hero {
-            position: relative;
             padding: 80px 0 60px;
             text-align: center;
         }
@@ -176,15 +156,12 @@
         }
         
         .showcase-img img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
         
-        .showcase-img:hover img {
-            transform: scale(1.1);
-        }
+        .showcase-img:hover img { transform: scale(1.1); }
         
         .showcase-img::after {
             content: '';
@@ -195,18 +172,13 @@
         
         .showcase-label {
             position: absolute;
-            bottom: 16px;
-            left: 16px;
+            bottom: 16px; left: 16px;
             z-index: 1;
             font-size: 14px;
             font-weight: 500;
         }
         
-        @media (max-width: 768px) {
-            .image-showcase {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media (max-width: 768px) { .image-showcase { grid-template-columns: 1fr; } }
         
         /* 导航 */
         .tabs {
@@ -239,19 +211,10 @@
             color: white;
         }
         
-        .tab-btn:hover:not(.active) {
-            background: rgba(255,255,255,0.1);
-            color: var(--text-primary);
-        }
+        .tab-btn:hover:not(.active) { background: rgba(255,255,255,0.1); color: var(--text-primary); }
         
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
         
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -277,8 +240,7 @@
         }
         
         .card h2 .icon {
-            width: 48px;
-            height: 48px;
+            width: 48px; height: 48px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 12px;
             display: flex;
@@ -287,7 +249,7 @@
             font-size: 24px;
         }
         
-        /* 统计卡片 */
+        /* 统计 */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -305,10 +267,7 @@
             transition: all 0.3s;
         }
         
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); }
         
         .stat-number {
             font-size: 48px;
@@ -320,12 +279,9 @@
             margin-bottom: 8px;
         }
         
-        .stat-label {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
+        .stat-label { font-size: 14px; color: var(--text-secondary); }
         
-        /* 团队成员 */
+        /* 团队 */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -343,14 +299,10 @@
             transition: all 0.3s;
         }
         
-        .team-member:hover {
-            border-color: var(--primary);
-            transform: translateX(5px);
-        }
+        .team-member:hover { border-color: var(--primary); transform: translateX(5px); }
         
         .member-avatar {
-            width: 64px;
-            height: 64px;
+            width: 64px; height: 64px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -360,76 +312,39 @@
             flex-shrink: 0;
         }
         
-        .member-info h4 {
-            font-size: 18px;
-            margin-bottom: 4px;
-        }
-        
-        .member-role {
-            font-size: 13px;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-        
-        .member-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
+        .member-info h4 { font-size: 18px; margin-bottom: 4px; }
+        .member-role { font-size: 13px; color: var(--primary); margin-bottom: 8px; }
+        .member-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
         
         /* 时间线 */
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-        }
+        .timeline { position: relative; padding-left: 40px; }
         
         .timeline::before {
             content: '';
             position: absolute;
-            left: 12px;
-            top: 0;
-            bottom: 0;
+            left: 12px; top: 0; bottom: 0;
             width: 2px;
             background: linear-gradient(180deg, var(--primary), var(--secondary));
         }
         
-        .timeline-item {
-            position: relative;
-            margin-bottom: 32px;
-        }
+        .timeline-item { position: relative; margin-bottom: 32px; }
         
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -34px;
-            top: 8px;
-            width: 16px;
-            height: 16px;
+            left: -34px; top: 8px;
+            width: 16px; height: 16px;
             background: var(--primary);
             border-radius: 50%;
             border: 4px solid var(--darker);
             box-shadow: 0 0 20px var(--primary);
         }
         
-        .timeline-date {
-            font-size: 13px;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
+        .timeline-date { font-size: 13px; color: var(--primary); font-weight: 600; margin-bottom: 8px; }
+        .timeline-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .timeline-desc { color: var(--text-secondary); line-height: 1.6; }
         
-        .timeline-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .timeline-desc {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        
-        /* 任务卡片 */
+        /* 任务 */
         .task-card {
             background: var(--glass);
             border: 1px solid var(--glass-border);
@@ -440,36 +355,16 @@
             transition: all 0.3s;
         }
         
-        .task-card:hover {
-            border-left-color: var(--secondary);
-        }
-        
+        .task-card:hover { border-left-color: var(--secondary); }
         .task-card.high { border-left-color: var(--danger); }
         .task-card.medium { border-left-color: var(--warning); }
         
-        .task-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 12px;
-        }
-        
-        .task-title {
-            font-size: 16px;
-            font-weight: 600;
-        }
-        
-        .task-owner {
-            background: var(--primary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
+        .task-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px; }
+        .task-title { font-size: 16px; font-weight: 600; }
+        .task-owner { background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
         
         .progress-bar {
-            width: 100%;
-            height: 6px;
+            width: 100%; height: 6px;
             background: rgba(255,255,255,0.1);
             border-radius: 3px;
             overflow: hidden;
@@ -492,16 +387,8 @@
             margin-bottom: 24px;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-secondary); }
         
         .form-group input,
         .form-group textarea,
@@ -524,20 +411,9 @@
             background: rgba(255,255,255,0.1);
         }
         
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .form-row { grid-template-columns: 1fr; }
-        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
         
         .btn-primary {
             width: 100%;
@@ -575,662 +451,700 @@
             gap: 8px;
         }
         
-        .work-log-who {
-            font-weight: 600;
-            color: var(--primary);
-        }
+        .work-log-who { font-weight: 600; color: var(--primary); }
+        .work-log-time { font-size: 13px; color: var(--text-secondary); }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; margin-left: 8px; }
+        .badge-category { background: rgba(139, 92, 246, 0.2); color: var(--secondary); }
+        .badge-status { background: rgba(16, 185, 129, 0.2); color: var(--success); }
         
-        .work-log-time {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
+        /* 语言内容切换 */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
         
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-left: 8px;
-        }
-        
-        .badge-category {
-            background: rgba(139, 92, 246, 0.2);
-            color: var(--secondary);
-        }
-        
-        .badge-status {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
-        
-        /* 隐藏非当前语言的内容 */
-        [data-lang] { display: none; }
-        [data-lang="zh"].active-lang { display: block; }
-        [data-lang="en"].active-lang { display: block; }
-        
-        .inline-lang[data-lang] { display: none; }
-        .inline-lang[data-lang="zh"].active-lang { display: inline; }
-        .inline-lang[data-lang="en"].active-lang { display: inline; }
-        
-        /* 列表项双语 */
-        li[data-lang] { display: none; }
-        li[data-lang="zh"].active-lang { display: list-item; }
-        li[data-lang="en"].active-lang { display: list-item; }
+        /* 列表 */
+        .content-list { margin-left: 24px; color: var(--text-secondary); line-height: 2; }
+        .content-list li { margin-bottom: 8px; }
     </style>
 </head>
 <body>
-    <div class="bg-animation">
-        <div class="grid-overlay"></div>
-    </div>
+    <div class="bg-animation"><div class="grid-overlay"></div></div>
     
     <!-- 语言切换 -->
     <div class="lang-switch">
-        <button class="lang-btn active" onclick="setLang('zh')">中文</button>
-        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
     </div>
     
     <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-badge" data-lang="zh" class="active-lang">🚀 第一期 · 样机开发阶段</div>
-            <div class="hero-badge" data-lang="en" class="active-lang">🚀 Phase 1 · Prototype Development</div>
+        <!-- ========== 中文版 ========== -->
+        <div id="content-zh" class="lang-content active">
+            <!-- Hero -->
+            <section class="hero">
+                <div class="hero-badge">🚀 第一期 · 样机开发阶段</div>
+                <h1>生物实验室的灵巧手</h1>
+                <p>面向生物实验室自动化场景的机器人解决方案 | 通过灵巧手、机械臂与智能控制系统，提升实验室操作效率与标准化水平</p>
+            </section>
             
-            <h1 data-lang="zh" class="active-lang">生物实验室的灵巧手</h1>
-            <h1 data-lang="en" class="active-lang">Bio-Lab Dexterous Robot Hand</h1>
-            
-            <p data-lang="zh" class="active-lang">面向生物实验室自动化场景的机器人解决方案 | 通过灵巧手、机械臂与智能控制系统，提升实验室操作效率与标准化水平</p>
-            <p data-lang="en" class="active-lang">Robotics Solution for Bio-Lab Automation | Enhancing lab efficiency and standardization through dexterous grippers, robotic arms, and intelligent control systems</p>
-        </section>
-        
-        <!-- 图片展示 -->
-        <div class="image-showcase">
-            <div class="showcase-img">
-                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Robot Arm">
-                <div class="showcase-label" data-lang="zh" class="active-lang">🤖 灵巧手原型</div>
-                <div class="showcase-label" data-lang="en" class="active-lang">🤖 Dexterous Gripper Prototype</div>
-            </div>
-            <div class="showcase-img">
-                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80" alt="Laboratory">
-                <div class="showcase-label" data-lang="zh" class="active-lang">🔬 生物实验室场景</div>
-                <div class="showcase-label" data-lang="en" class="active-lang">🔬 Bio-Lab Environment</div>
-            </div>
-            <div class="showcase-img">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Precision Robot">
-                <div class="showcase-label" data-lang="zh" class="active-lang">⚙️ 精密机械系统</div>
-                <div class="showcase-label" data-lang="en" class="active-lang">⚙️ Precision Mechanical System</div>
-            </div>
-        </div>
-        
-        <!-- 导航 -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('overview')">
-                <span data-lang="zh" class="active-lang">📊 项目概览</span>
-                <span data-lang="en" class="active-lang">📊 Overview</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab('team')">
-                <span data-lang="zh" class="active-lang">👥 团队</span>
-                <span data-lang="en" class="active-lang">👥 Team</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab('progress')">
-                <span data-lang="zh" class="active-lang">📈 进度</span>
-                <span data-lang="en" class="active-lang">📈 Progress</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab('tasks')">
-                <span data-lang="zh" class="active-lang">✅ 任务</span>
-                <span data-lang="en" class="active-lang">✅ Tasks</span>
-            </button>
-            <button class="tab-btn" onclick="switchTab('worklog')">
-                <span data-lang="zh" class="active-lang">📝 记录</span>
-                <span data-lang="en" class="active-lang">📝 Logs</span>
-            </button>
-        </div>
-        
-        <!-- ========== 项目概览 ========== -->
-        <div id="overview" class="tab-content active">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">45%</div>
-                    <div class="stat-label" data-lang="zh" class="active-lang">项目进度</div>
-                    <div class="stat-label" data-lang="en" class="active-lang">Progress</div>
+            <!-- 图片 -->
+            <div class="image-showcase">
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="机器人">
+                    <div class="showcase-label">🤖 灵巧手原型</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">5</div>
-                    <div class="stat-label" data-lang="zh" class="active-lang">核心成员</div>
-                    <div class="stat-label" data-lang="en" class="active-lang">Team Members</div>
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80" alt="实验室">
+                    <div class="showcase-label">🔬 生物实验室场景</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">7</div>
-                    <div class="stat-label" data-lang="zh" class="active-lang">优先任务</div>
-                    <div class="stat-label" data-lang="en" class="active-lang">Priority Tasks</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label" data-lang="zh" class="active-lang">周目标周期</div>
-                    <div class="stat-label" data-lang="en" class="active-lang">Week Target</div>
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="精密机械">
+                    <div class="showcase-label">⚙️ 精密机械系统</div>
                 </div>
             </div>
             
-            <div class="card">
-                <h2>
-                    <span class="icon">🎯</span>
-                    <span data-lang="zh" class="active-lang">项目定位与原则</span>
-                    <span data-lang="en" class="active-lang">Project Vision & Principles</span>
-                </h2>
-                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;" data-lang="zh" class="active-lang">
-                    "生物实验室的灵巧手"聚焦实验流程中高频、重复、对精度要求高的关键操作环节，通过灵巧手、机械臂与自动化控制系统的结合，提升实验室操作效率和标准化水平。
-                </p>
-                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;" data-lang="en" class="active-lang">
-                    The "Bio-Lab Dexterous Robot Hand" focuses on high-frequency, repetitive operations requiring precision in lab workflows. By combining dexterous grippers, robotic arms, and automated control systems, we enhance lab efficiency and standardization.
-                </p>
-                
-                <h4 data-lang="zh" class="active-lang" style="margin-bottom: 12px;">第一期优先原则 Phase 1 Priorities:</h4>
-                <h4 data-lang="en" class="active-lang" style="margin-bottom: 12px;">第一期优先原则 Phase 1 Priorities:</h4>
-                <ul style="margin-left: 24px; color: var(--text-secondary); line-height: 2;">
-                    <li data-lang="zh" class="active-lang">✓ 聚焦可落地、可验证、可收费的应用场景</li>
-                    <li data-lang="zh" class="active-lang">✓ 优先完成真实场景的样机开发与功能验证</li>
-                    <li data-lang="zh" class="active-lang">✓ 先形成收入闭环，再逐步拓展技术方向</li>
-                    <li data-lang="en" class="active-lang">✓ Focus on deliverable, verifiable, and billable scenarios</li>
-                    <li data-lang="en" class="active-lang">✓ Prioritize prototype development and function verification</li>
-                    <li data-lang="en" class="active-lang">✓ Establish revenue loop first, then expand technology</li>
-                </ul>
+            <!-- 导航 -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('overview-zh')">📊 项目概览</button>
+                <button class="tab-btn" onclick="switchTab('team-zh')">👥 团队</button>
+                <button class="tab-btn" onclick="switchTab('progress-zh')">📈 进度</button>
+                <button class="tab-btn" onclick="switchTab('tasks-zh')">✅ 任务</button>
+                <button class="tab-btn" onclick="switchTab('worklog-zh')">📝 记录</button>
             </div>
             
-            <div class="card">
-                <h2>
-                    <span class="icon">🔬</span>
-                    <span data-lang="zh" class="active-lang">第一期案例与技术方向</span>
-                    <span data-lang="en" class="active-lang">Phase 1 Cases & Tech Direction</span>
-                </h2>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh" class="active-lang"><strong>核心切入点：</strong>实验室移液、抓取、挤压、转移自动化</p>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en" class="active-lang"><strong>Core Focus:</strong> Lab pipetting, grasping, squeezing, and transfer automation</p>
-                
-                <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh" class="active-lang"><strong>技术重点：</strong></p>
-                <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en" class="active-lang"><strong>Technical Focus:</strong></p>
-                <ul style="margin-left: 24px; color: var(--text-secondary); line-height: 2;">
-                    <li data-lang="zh" class="active-lang">实验室线下调研与需求确认</li>
-                    <li data-lang="zh" class="active-lang">末端执行器设计与稳定性验证</li>
-                    <li data-lang="zh" class="active-lang">精度与重复执行一致性控制</li>
-                    <li data-lang="zh" class="active-lang">原型快速迭代（1-2个月内可用）</li>
-                    <li data-lang="en" class="active-lang">On-site lab research and requirement confirmation</li>
-                    <li data-lang="en" class="active-lang">End-effector design and stability verification</li>
-                    <li data-lang="en" class="active-lang">Precision and repeatability control</li>
-                    <li data-lang="en" class="active-lang">Rapid prototype iteration (usable in 1-2 months)</li>
-                </ul>
-            </div>
-            
-            <div class="card">
-                <h2>
-                    <span class="icon">💰</span>
-                    <span data-lang="zh" class="active-lang">商业化与知识产权</span>
-                    <span data-lang="en" class="active-lang">Business & IP Strategy</span>
-                </h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div style="background: var(--glass); padding: 20px; border-radius: 12px;">
-                        <h4 data-lang="zh" class="active-lang" style="margin-bottom: 12px; color: var(--success);">💰 收入模式</h4>
-                        <h4 data-lang="en" class="active-lang" style="margin-bottom: 12px; color: var(--success);">💰 Revenue Model</h4>
-                        <ul style="color: var(--text-secondary); line-height: 2; font-size: 14px;">
-                            <li data-lang="zh" class="active-lang">实验室自动化项目开发</li>
-                            <li data-lang="zh" class="active-lang">定制化设备/模块交付</li>
-                            <li data-lang="zh" class="active-lang">维护、维修与升级服务</li>
-                            <li data-lang="zh" class="active-lang">暑期研究项目收入</li>
-                            <li data-lang="en" class="active-lang">Lab automation projects</li>
-                            <li data-lang="en" class="active-lang">Custom equipment delivery</li>
-                            <li data-lang="en" class="active-lang">Maintenance & upgrade services</li>
-                            <li data-lang="en" class="active-lang">Summer research program revenue</li>
-                        </ul>
-                    </div>
-                    <div style="background: var(--glass); padding: 20px; border-radius: 12px;">
-                        <h4 data-lang="zh" class="active-lang" style="margin-bottom: 12px; color: var(--secondary);">🔐 知识产权</h4>
-                        <h4 data-lang="en" class="active-lang" style="margin-bottom: 12px; color: var(--secondary);">🔐 IP Protection</h4>
-                        <ul style="color: var(--text-secondary); line-height: 2; font-size: 14px;">
-                            <li data-lang="zh" class="active-lang">灵巧手结构专利申请</li>
-                            <li data-lang="zh" class="active-lang">末端执行器方案保护</li>
-                            <li data-lang="zh" class="active-lang">技术资料保密管理</li>
-                            <li data-lang="zh" class="active-lang">合作保密协议签署</li>
-                            <li data-lang="en" class="active-lang">Gripper structure patents</li>
-                            <li data-lang="en" class="active-lang">End-effector IP protection</li>
-                            <li data-lang="en" class="active-lang">Technical documentation security</li>
-                            <li data-lang="en" class="active-lang">NDA and cooperation agreements</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- ========== 团队 ========== -->
-        <div id="team" class="tab-content">
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-avatar" style="background: linear-gradient(135deg, #0ea5e9, #06b6d4);">凯</div>
-                    <div class="member-info">
-                        <h4>凯哥 Kai</h4>
-                        <div class="member-role">CTO · 技术研发</div>
-                        <div class="member-desc" data-lang="zh" class="active-lang">原型设计、机械结构、控制实现、测试迭代</div>
-                        <div class="member-desc" data-lang="en" class="active-lang">Prototype, Mechanics, Control, Testing</div>
-                    </div>
+            <!-- 项目概览 -->
+            <div id="overview-zh" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-number">45%</div><div class="stat-label">项目进度</div></div>
+                    <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">核心成员</div></div>
+                    <div class="stat-card"><div class="stat-number">7</div><div class="stat-label">优先任务</div></div>
+                    <div class="stat-card"><div class="stat-number">8</div><div class="stat-label">周目标周期</div></div>
                 </div>
                 
-                <div class="team-member">
-                    <div class="member-avatar" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">A</div>
-                    <div class="member-info">
-                        <h4>Angela</h4>
-                        <div class="member-role">Marketing · 市场营销</div>
-                        <div class="member-desc" data-lang="zh" class="active-lang">网站建设、品牌宣传、社交媒体运营</div>
-                        <div class="member-desc" data-lang="en" class="active-lang">Website, Branding, Social Media</div>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">Y</div>
-                    <div class="member-info">
-                        <h4>Yin</h4>
-                        <div class="member-role">BD · 商务拓展</div>
-                        <div class="member-desc" data-lang="zh" class="active-lang">高校合作、医院合作、暑期项目</div>
-                        <div class="member-desc" data-lang="en" class="active-lang">University/Hospital Partnership, Summer Program</div>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-avatar" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">Z</div>
-                    <div class="member-info">
-                        <h4>ZeZe</h4>
-                        <div class="member-role">技术支持 · Tech Support</div>
-                        <div class="member-desc" data-lang="zh" class="active-lang">实验室调研、需求分析、空间适配</div>
-                        <div class="member-desc" data-lang="en" class="active-lang">Lab Research, Requirements, Space Planning</div>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-avatar" style="background: linear-gradient(135deg, #8b5cf6, #a855f7);">AE</div>
-                    <div class="member-info">
-                        <h4>Angell</h4>
-                        <div class="member-role">CEO · 首席执行官</div>
-                        <div class="member-desc" data-lang="zh" class="active-lang">项目统筹、战略推进、资源整合</div>
-                        <div class="member-desc" data-lang="en" class="active-lang">Strategy, Coordination, Resource Integration</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card" style="margin-top: 24px;">
-                <h2>
-                    <span class="icon">🎓</span>
-                    <span data-lang="zh" class="active-lang">斯坦福暑期高中生研究项目</span>
-                    <span data-lang="en" class="active-lang">Stanford Summer HS Research Program</span>
-                </h2>
-                <p style="color: var(--text-secondary); line-height: 1.8;" data-lang="zh" class="active-lang">
-                    面向优秀高中生开放参与机会，让学生在真实科研与工程项目中获得训练，为项目建立早期人才观察与培养机制，支持优秀学生参与论文发表。
-                </p>
-                <p style="color: var(--text-secondary); line-height: 1.8;" data-lang="en" class="active-lang">
-                    Open to outstanding high school students, providing hands-on experience in real research and engineering projects. Building early talent pipeline and supporting student paper publications.
-                </p>
-            </div>
-        </div>
-        
-        <!-- ========== 进度 ========== -->
-        <div id="progress" class="tab-content">
-            <div class="card">
-                <h2>
-                    <span class="icon">📅</span>
-                    <span data-lang="zh" class="active-lang">里程碑时间线</span>
-                    <span data-lang="en" class="active-lang">Project Milestones</span>
-                </h2>
-                
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date" data-lang="zh" class="active-lang">第 1-2 周</div>
-                        <div class="timeline-date" data-lang="en" class="active-lang">Week 1-2</div>
-                        <div class="timeline-title" data-lang="zh" class="active-lang">🚀 启动与基础建设</div>
-                        <div class="timeline-title" data-lang="en" class="active-lang">🚀 Launch & Foundation</div>
-                        <div class="timeline-desc" data-lang="zh" class="active-lang">公司起名、官方账号注册、网站搭建、团队初次协调会</div>
-                        <div class="timeline-desc" data-lang="en" class="active-lang">Company naming, official accounts, website setup, kickoff meeting</div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-date" data-lang="zh" class="active-lang">第 3-4 周</div>
-                        <div class="timeline-date" data-lang="en" class="active-lang">Week 3-4</div>
-                        <div class="timeline-title" data-lang="zh" class="active-lang">🔬 调研与需求确认</div>
-                        <div class="timeline-title" data-lang="en" class="active-lang">🔬 Research & Requirements</div>
-                        <div class="timeline-desc" data-lang="zh" class="active-lang">实验室场景调研、明确第一期案例需求、技术方案评估</div>
-                        <div class="timeline-desc" data-lang="en" class="active-lang">Lab research, Phase 1 requirements, tech evaluation</div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-date" data-lang="zh" class="active-lang">第 5-8 周</div>
-                        <div class="timeline-date" data-lang="en" class="active-lang">Week 5-8</div>
-                        <div class="timeline-title" data-lang="zh" class="active-lang">⚙️ 原型设计与迭代</div>
-                        <div class="timeline-title" data-lang="en" class="active-lang">⚙️ Prototype & Iteration</div>
-                        <div class="timeline-desc" data-lang="zh" class="active-lang">灵巧手/机械臂原型设计、首版制造、功能测试、多轮优化</div>
-                        <div class="timeline-desc" data-lang="en" class="active-lang">Gripper/robot prototype design, manufacturing, testing, optimization</div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-date" data-lang="zh" class="active-lang">第 9-10 周</div>
-                        <div class="timeline-date" data-lang="en" class="active-lang">Week 9-10</div>
-                        <div class="timeline-title" data-lang="zh" class="active-lang">📸 验证与展示</div>
-                        <div class="timeline-title" data-lang="en" class="active-lang">📸 Verification & Demo</div>
-                        <div class="timeline-desc" data-lang="zh" class="active-lang">完整功能测试、案例文档、宣传素材、客户反馈</div>
-                        <div class="timeline-desc" data-lang="en" class="active-lang">Full testing, documentation, marketing materials, client feedback</div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-date" data-lang="zh" class="active-lang">第 11-12 周</div>
-                        <div class="timeline-date" data-lang="en" class="active-lang">Week 11-12</div>
-                        <div class="timeline-title" data-lang="zh" class="active-lang">💼 商业化启动</div>
-                        <div class="timeline-title" data-lang="en" class="active-lang">💼 Commercialization</div>
-                        <div class="timeline-desc" data-lang="zh" class="active-lang">合作协议签署、暑期实习计划上线、专利申请启动</div>
-                        <div class="timeline-desc" data-lang="en" class="active-lang">Cooperation agreements, summer program launch, patent filing</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <h2>
-                    <span class="icon">⚡</span>
-                    <span data-lang="zh" class="active-lang">当前优先事项</span>
-                    <span data-lang="en" class="active-lang">Current Priorities</span>
-                </h2>
-                
-                <div class="task-card high">
-                    <div class="task-header">
-                        <div class="task-title" data-lang="zh" class="active-lang">🎨 确定公司名称与品牌 VI</div>
-                        <div class="task-title" data-lang="en" class="active-lang">🎨 Company Naming & Brand VI</div>
-                        <span class="task-owner">全员 All</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div>
-                    <div style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);">
-                        <span data-lang="zh" class="active-lang">协调: Angell | 周期: 1周</span>
-                        <span data-lang="en" class="active-lang">Coordinator: Angell | Duration: 1 week</span>
-                    </div>
-                </div>
-                
-                <div class="task-card high">
-                    <div class="task-header">
-                        <div class="task-title" data-lang="zh" class="active-lang">🌐 网站建设与官方账号</div>
-                        <div class="task-title" data-lang="en" class="active-lang">🌐 Website & Official Accounts</div>
-                        <span class="task-owner">Angela</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 30%;"></div></div>
-                </div>
-                
-                <div class="task-card high">
-                    <div class="task-header">
-                        <div class="task-title" data-lang="zh" class="active-lang">🔍 实验室场景线下调研</div>
-                        <div class="task-title" data-lang="en" class="active-lang">🔍 On-site Lab Research</div>
-                        <span class="task-owner">凯哥/ZeZe</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
-                </div>
-                
-                <div class="task-card high">
-                    <div class="task-header">
-                        <div class="task-title" data-lang="zh" class="active-lang">🤖 第一代原型设计</div>
-                        <div class="task-title" data-lang="en" class="active-lang">🤖 Phase 1 Prototype Design</div>
-                        <span class="task-owner">凯哥</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 15%;"></div></div>
-                </div>
-                
-                <div class="task-card medium">
-                    <div class="task-header">
-                        <div class="task-title" data-lang="zh" class="active-lang">📋 公司注册与合作框架</div>
-                        <div class="task-title" data-lang="en" class="active-lang">📋 Company Registration & Framework</div>
-                        <span class="task-owner">Angell</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- ========== 任务管理 ========== -->
-        <div id="tasks" class="tab-content">
-            <div class="form-section">
-                <h3 style="margin-bottom: 24px;" data-lang="zh" class="active-lang">✨ 提交你的工作内容与进展</h3>
-                <h3 style="margin-bottom: 24px;" data-lang="en" class="active-lang">✨ Submit Your Work Progress</h3>
-                
-                <form id="taskForm" onsubmit="submitTask(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label data-lang="zh" class="active-lang">👤 你是谁?</label>
-                            <label data-lang="en" class="active-lang">👤 Your Name</label>
-                            <select id="member" required>
-                                <option value="">-- Select / 选择 --</option>
-                                <option value="凯哥">凯哥 Kai (CTO)</option>
-                                <option value="Angela">Angela</option>
-                                <option value="Yin">Yin</option>
-                                <option value="ZeZe">ZeZe</option>
-                                <option value="Angell">Angell (CEO)</option>
-                                <option value="其他">其他 Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label data-lang="zh" class="active-lang">📂 工作分类</label>
-                            <label data-lang="en" class="active-lang">📂 Category</label>
-                            <select id="category" required>
-                                <option value="">-- Select / 选择 --</option>
-                                <option value="技术研发">技术研发 Tech</option>
-                                <option value="市场宣传">市场宣传 Marketing</option>
-                                <option value="商务合作">商务合作 BD</option>
-                                <option value="调研评估">调研评估 Research</option>
-                                <option value="行政管理">行政管理 Admin</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label data-lang="zh" class="active-lang">📌 任务/进展标题</label>
-                        <label data-lang="en" class="active-lang">📌 Task Title</label>
-                        <input type="text" id="title" placeholder="e.g. 完成实验室调研 / Completed lab research" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label data-lang="zh" class="active-lang">📝 详细描述</label>
-                        <label data-lang="en" class="active-lang">📝 Description</label>
-                        <textarea id="description" placeholder="Describe your progress, completed work, issues, needed help..." required></textarea>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label data-lang="zh" class="active-lang">✅ 完成度</label>
-                            <label data-lang="en" class="active-lang">✅ Status</label>
-                            <select id="status" required>
-                                <option value="计划中">计划中 Planning</option>
-                                <option value="进行中">进行中 In Progress</option>
-                                <option value="即将完成">即将完成 Almost Done</option>
-                                <option value="已完成">已完成 Completed</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label data-lang="zh" class="active-lang">📅 预期完成</label>
-                            <label data-lang="en" class="active-lang">📅 Due Date</label>
-                            <input type="date" id="dueDate" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label data-lang="zh" class="active-lang">🆘 需要的支持 (可选)</label>
-                        <label data-lang="en" class="active-lang">🆘 Needed Help (Optional)</label>
-                        <textarea id="needsHelp" placeholder="Any blockers or support needed?"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary">
-                        <span data-lang="zh" class="active-lang">🚀 提交工作进展</span>
-                        <span data-lang="en" class="active-lang">🚀 Submit Progress</span>
-                    </button>
-                </form>
-            </div>
-            
-            <div class="card">
-                <h2>
-                    <span class="icon">📋</span>
-                    <span data-lang="zh" class="active-lang">团队工作进度日志</span>
-                    <span data-lang="en" class="active-lang">📋 Team Progress Log</span>
-                </h2>
-                <div id="worklogContainer">
-                    <p style="color: var(--text-secondary); text-align: center; padding: 40px;">
-                        <span data-lang="zh" class="active-lang">暂无工作记录。提交第一条进展吧！</span>
-                        <span data-lang="en" class="active-lang">No work logs yet. Submit your first progress!</span>
+                <div class="card">
+                    <h2><span class="icon">🎯</span>项目定位与原则</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">
+                        "生物实验室的灵巧手"聚焦实验流程中高频、重复、对精度要求高的关键操作环节，通过灵巧手、机械臂与自动化控制系统的结合，提升实验室操作效率和标准化水平。
                     </p>
+                    <h4 style="margin-bottom: 12px;">第一期优先原则：</h4>
+                    <ul class="content-list">
+                        <li>✓ 聚焦可落地、可验证、可收费的应用场景</li>
+                        <li>✓ 优先完成真实场景的样机开发与功能验证</li>
+                        <li>✓ 先形成收入闭环，再逐步拓展技术方向</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">🔬</span>第一期案例与技术方向</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>核心切入点：</strong>实验室移液、抓取、挤压、转移自动化</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>技术重点：</strong></p>
+                    <ul class="content-list">
+                        <li>实验室线下调研与需求确认</li>
+                        <li>末端执行器设计与稳定性验证</li>
+                        <li>精度与重复执行一致性控制</li>
+                        <li>原型快速迭代（1-2个月内可用）</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">💰</span>商业化与知识产权</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="background: var(--glass); padding: 20px; border-radius: 12px;">
+                            <h4 style="margin-bottom: 12px; color: var(--success);">💰 收入模式</h4>
+                            <ul class="content-list" style="font-size: 14px;">
+                                <li>实验室自动化项目开发</li>
+                                <li>定制化设备/模块交付</li>
+                                <li>维护、维修与升级服务</li>
+                                <li>暑期研究项目收入</li>
+                            </ul>
+                        </div>
+                        <div style="background: var(--glass); padding: 20px; border-radius: 12px;">
+                            <h4 style="margin-bottom: 12px; color: var(--secondary);">🔐 知识产权</h4>
+                            <ul class="content-list" style="font-size: 14px;">
+                                <li>灵巧手结构专利申请</li>
+                                <li>末端执行器方案保护</li>
+                                <li>技术资料保密管理</li>
+                                <li>合作保密协议签署</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- ========== 工作记录 ========== -->
-        <div id="worklog" class="tab-content">
-            <div class="card">
-                <h2>
-                    <span class="icon">📊</span>
-                    <span data-lang="zh" class="active-lang">工作记录档案</span>
-                    <span data-lang="en" class="active-lang">📊 Work Log Archive</span>
-                </h2>
-                <div id="allWorklogs">
-                    <p style="color: var(--text-secondary); text-align: center; padding: 40px;">
-                        <span data-lang="zh" class="active-lang">暂无工作记录</span>
-                        <span data-lang="en" class="active-lang">No logs yet</span>
+            
+            <!-- 团队 -->
+            <div id="team-zh" class="tab-content">
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #0ea5e9, #06b6d4);">凯</div>
+                        <div class="member-info">
+                            <h4>凯哥</h4>
+                            <div class="member-role">CTO · 技术研发</div>
+                            <div class="member-desc">原型设计、机械结构、控制实现、测试迭代</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">A</div>
+                        <div class="member-info">
+                            <h4>Angela</h4>
+                            <div class="member-role">Marketing · 市场营销</div>
+                            <div class="member-desc">网站建设、品牌宣传、社交媒体运营</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">Y</div>
+                        <div class="member-info">
+                            <h4>Yin</h4>
+                            <div class="member-role">BD · 商务拓展</div>
+                            <div class="member-desc">高校合作、医院合作、暑期项目</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">Z</div>
+                        <div class="member-info">
+                            <h4>ZeZe</h4>
+                            <div class="member-role">技术支持</div>
+                            <div class="member-desc">实验室调研、需求分析、空间适配</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #8b5cf6, #a855f7);">AE</div>
+                        <div class="member-info">
+                            <h4>Angell</h4>
+                            <div class="member-role">CEO · 首席执行官</div>
+                            <div class="member-desc">项目统筹、战略推进、资源整合</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top: 24px;">
+                    <h2><span class="icon">🎓</span>斯坦福暑期高中生研究项目</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        面向优秀高中生开放参与机会，让学生在真实科研与工程项目中获得训练，为项目建立早期人才观察与培养机制，支持优秀学生参与论文发表。
                     </p>
                 </div>
             </div>
             
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalTasks">0</div>
-                    <div class="stat-label" data-lang="zh" class="active-lang">总任务</div>
-                    <div class="stat-label" data-lang="en" class="active-lang">Total</div>
+            <!-- 进度 -->
+            <div id="progress-zh" class="tab-content">
+                <div class="card">
+                    <h2><span class="icon">📅</span>里程碑时间线</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">第 1-2 周</div>
+                            <div class="timeline-title">🚀 启动与基础建设</div>
+                            <div class="timeline-desc">公司起名、官方账号注册、网站搭建、团队初次协调会</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">第 3-4 周</div>
+                            <div class="timeline-title">🔬 调研与需求确认</div>
+                            <div class="timeline-desc">实验室场景调研、明确第一期案例需求、技术方案评估</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">第 5-8 周</div>
+                            <div class="timeline-title">⚙️ 原型设计与迭代</div>
+                            <div class="timeline-desc">灵巧手/机械臂原型设计、首版制造、功能测试、多轮优化</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">第 9-10 周</div>
+                            <div class="timeline-title">📸 验证与展示</div>
+                            <div class="timeline-desc">完整功能测试、案例文档、宣传素材、客户反馈</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">第 11-12 周</div>
+                            <div class="timeline-title">💼 商业化启动</div>
+                            <div class="timeline-desc">合作协议签署、暑期实习计划上线、专利申请启动</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="completedTasks">0</div>
-                    <div class="stat-label" data-lang="zh" class="active-lang">已完成</div>
-                    <div class="stat-label" data-lang="en" class="active-lang">Completed</div>
+                
+                <div class="card">
+                    <h2><span class="icon">⚡</span>当前优先事项</h2>
+                    <div class="task-card high">
+                        <div class="task-header">
+                            <div class="task-title">🎨 确定公司名称与品牌 VI</div>
+                            <span class="task-owner">全员</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div>
+                        <div style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);">协调: Angell | 周期: 1周</div>
+                    </div>
+                    <div class="task-card high">
+                        <div class="task-header">
+                            <div class="task-title">🌐 网站建设与官方账号</div>
+                            <span class="task-owner">Angela</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 30%;"></div></div>
+                    </div>
+                    <div class="task-card high">
+                        <div class="task-header">
+                            <div class="task-title">🔍 实验室场景线下调研</div>
+                            <span class="task-owner">凯哥/ZeZe</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
+                    </div>
+                    <div class="task-card high">
+                        <div class="task-header">
+                            <div class="task-title">🤖 第一代原型设计</div>
+                            <span class="task-owner">凯哥</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 15%;"></div></div>
+                    </div>
+                    <div class="task-card medium">
+                        <div class="task-header">
+                            <div class="task-title">📋 公司注册与合作框架</div>
+                            <span class="task-owner">Angell</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="inProgressTasks">0</div>
-                    <div class="stat-label" data-lang="zh" class="active-lang">进行中</div>
-                    <div class="stat-label" data-lang="en" class="active-lang">In Progress</div>
+            </div>
+            
+            <!-- 任务 -->
+            <div id="tasks-zh" class="tab-content">
+                <div class="form-section">
+                    <h3 style="margin-bottom: 24px;">✨ 提交你的工作内容与进展</h3>
+                    <form id="taskForm-zh" onsubmit="submitTask('zh', event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>👤 你是谁?</label>
+                                <select id="member-zh" required>
+                                    <option value="">-- 选择 --</option>
+                                    <option value="凯哥">凯哥 (CTO)</option>
+                                    <option value="Angela">Angela</option>
+                                    <option value="Yin">Yin</option>
+                                    <option value="ZeZe">ZeZe</option>
+                                    <option value="Angell">Angell (CEO)</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>📂 工作分类</label>
+                                <select id="category-zh" required>
+                                    <option value="">-- 选择 --</option>
+                                    <option value="技术研发">技术研发</option>
+                                    <option value="市场宣传">市场宣传</option>
+                                    <option value="商务合作">商务合作</option>
+                                    <option value="调研评估">调研评估</option>
+                                    <option value="行政管理">行政管理</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>📌 任务/进展标题</label>
+                            <input type="text" id="title-zh" placeholder="例如: 完成实验室调研" required>
+                        </div>
+                        <div class="form-group">
+                            <label>📝 详细描述</label>
+                            <textarea id="description-zh" placeholder="描述你完成了什么、目前进度、遇到的问题..." required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>✅ 完成度</label>
+                                <select id="status-zh" required>
+                                    <option value="计划中">计划中</option>
+                                    <option value="进行中">进行中</option>
+                                    <option value="即将完成">即将完成</option>
+                                    <option value="已完成">已完成</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>📅 预期完成</label>
+                                <input type="date" id="dueDate-zh" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>🆘 需要的支持 (可选)</label>
+                            <textarea id="needsHelp-zh" placeholder="如果有卡住的地方，请在这里说明"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">🚀 提交工作进展</button>
+                    </form>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="pendingTasks">0</div>
-                    <div class="stat-label" data-lang="zh" class="active-lang">计划中</div>
-                    <div class="stat-label" data-lang="en" class="active-lang">Pending</div>
+                
+                <div class="card">
+                    <h2><span class="icon">📋</span>团队工作进度日志</h2>
+                    <div id="worklogContainer-zh"></div>
+                </div>
+            </div>
+            
+            <!-- 记录 -->
+            <div id="worklog-zh" class="tab-content">
+                <div class="card">
+                    <h2><span class="icon">📊</span>工作记录档案</h2>
+                    <div id="allWorklogs-zh"></div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-number" id="totalTasks-zh">0</div><div class="stat-label">总任务</div></div>
+                    <div class="stat-card"><div class="stat-number" id="completedTasks-zh">0</div><div class="stat-label">已完成</div></div>
+                    <div class="stat-card"><div class="stat-number" id="inProgressTasks-zh">0</div><div class="stat-label">进行中</div></div>
+                    <div class="stat-card"><div class="stat-number" id="pendingTasks-zh">0</div><div class="stat-label">计划中</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== 英文版 ========== -->
+        <div id="content-en" class="lang-content">
+            <!-- Hero -->
+            <section class="hero">
+                <div class="hero-badge">🚀 Phase 1 · Prototype Development</div>
+                <h1>Bio-Lab Dexterous Robot Hand</h1>
+                <p>Robotics Solution for Bio-Lab Automation | Enhancing lab efficiency and standardization through dexterous grippers, robotic arms, and intelligent control systems</p>
+            </section>
+            
+            <!-- Images -->
+            <div class="image-showcase">
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Robot">
+                    <div class="showcase-label">🤖 Dexterous Gripper Prototype</div>
+                </div>
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80" alt="Laboratory">
+                    <div class="showcase-label">🔬 Bio-Lab Environment</div>
+                </div>
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Precision Robot">
+                    <div class="showcase-label">⚙️ Precision Mechanical System</div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('overview-en')">📊 Overview</button>
+                <button class="tab-btn" onclick="switchTab('team-en')">👥 Team</button>
+                <button class="tab-btn" onclick="switchTab('progress-en')">📈 Progress</button>
+                <button class="tab-btn" onclick="switchTab('tasks-en')">✅ Tasks</button>
+                <button class="tab-btn" onclick="switchTab('worklog-en')">📝 Logs</button>
+            </div>
+            
+            <!-- Overview -->
+            <div id="overview-en" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-number">45%</div><div class="stat-label">Progress</div></div>
+                    <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">Team Members</div></div>
+                    <div class="stat-card"><div class="stat-number">7</div><div class="stat-label">Priority Tasks</div></div>
+                    <div class="stat-card"><div class="stat-number">8</div><div class="stat-label">Week Target</div></div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">🎯</span>Project Vision & Principles</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">
+                        The "Bio-Lab Dexterous Robot Hand" focuses on high-frequency, repetitive operations requiring precision in lab workflows. By combining dexterous grippers, robotic arms, and automated control systems, we enhance lab efficiency and standardization.
+                    </p>
+                    <h4 style="margin-bottom: 12px;">Phase 1 Priorities:</h4>
+                    <ul class="content-list">
+                        <li>✓ Focus on deliverable, verifiable, and billable scenarios</li>
+                        <li>✓ Prioritize prototype development and function verification</li>
+                        <li>✓ Establish revenue loop first, then expand technology</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">🔬</span>Phase 1 Cases & Tech Direction</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Core Focus:</strong> Lab pipetting, grasping, squeezing, and transfer automation</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;"><strong>Technical Focus:</strong></p>
+                    <ul class="content-list">
+                        <li>On-site lab research and requirement confirmation</li>
+                        <li>End-effector design and stability verification</li>
+                        <li>Precision and repeatability control</li>
+                        <li>Rapid prototype iteration (usable in 1-2 months)</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">💰</span>Business & IP Strategy</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="background: var(--glass); padding: 20px; border-radius: 12px;">
+                            <h4 style="margin-bottom: 12px; color: var(--success);">💰 Revenue Model</h4>
+                            <ul class="content-list" style="font-size: 14px;">
+                                <li>Lab automation projects</li>
+                                <li>Custom equipment delivery</li>
+                                <li>Maintenance & upgrade services</li>
+                                <li>Summer research program revenue</li>
+                            </ul>
+                        </div>
+                        <div style="background: var(--glass); padding: 20px; border-radius: 12px;">
+                            <h4 style="margin-bottom: 12px; color: var(--secondary);">🔐 IP Protection</h4>
+                            <ul class="content-list" style="font-size: 14px;">
+                                <li>Gripper structure patents</li>
+                                <li>End-effector IP protection</li>
+                                <li>Technical documentation security</li>
+                                <li>NDA and cooperation agreements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team -->
+            <div id="team-en" class="tab-content">
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #0ea5e9, #06b6d4);">K</div>
+                        <div class="member-info">
+                            <h4>Kai</h4>
+                            <div class="member-role">CTO · Tech Lead</div>
+                            <div class="member-desc">Prototype, Mechanics, Control, Testing</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">A</div>
+                        <div class="member-info">
+                            <h4>Angela</h4>
+                            <div class="member-role">Marketing</div>
+                            <div class="member-desc">Website, Branding, Social Media</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">Y</div>
+                        <div class="member-info">
+                            <h4>Yin</h4>
+                            <div class="member-role">BD Lead</div>
+                            <div class="member-desc">University/Hospital Partnership, Summer Program</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">Z</div>
+                        <div class="member-info">
+                            <h4>ZeZe</h4>
+                            <div class="member-role">Tech Support</div>
+                            <div class="member-desc">Lab Research, Requirements, Space Planning</div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar" style="background: linear-gradient(135deg, #8b5cf6, #a855f7);">AE</div>
+                        <div class="member-info">
+                            <h4>Angell</h4>
+                            <div class="member-role">CEO</div>
+                            <div class="member-desc">Strategy, Coordination, Resources</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top: 24px;">
+                    <h2><span class="icon">🎓</span>Stanford Summer HS Research Program</h2>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Open to outstanding high school students, providing hands-on experience in real research and engineering projects. Building early talent pipeline and supporting student paper publications.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Progress -->
+            <div id="progress-en" class="tab-content">
+                <div class="card">
+                    <h2><span class="icon">📅</span>Project Milestones</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Week 1-2</div>
+                            <div class="timeline-title">🚀 Launch & Foundation</div>
+                            <div class="timeline-desc">Company naming, official accounts, website setup, kickoff meeting</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Week 3-4</div>
+                            <div class="timeline-title">🔬 Research & Requirements</div>
+                            <div class="timeline-desc">Lab research, Phase 1 requirements, tech evaluation</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Week 5-8</div>
+                            <div class="timeline-title">⚙️ Prototype & Iteration</div>
+                            <div class="timeline-desc">Gripper/robot prototype design, manufacturing, testing, optimization</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Week 9-10</div>
+                            <div class="timeline-title">📸 Verification & Demo</div>
+                            <div class="timeline-desc">Full testing, documentation, marketing materials, client feedback</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Week 11-12</div>
+                            <div class="timeline-title">💼 Commercialization</div>
+                            <div class="timeline-desc">Cooperation agreements, summer program launch, patent filing</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">⚡</span>Current Priorities</h2>
+                    <div class="task-card high">
+                        <div class="task-header">
+                            <div class="task-title">🎨 Company Naming & Brand VI</div>
+                            <span class="task-owner">All</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div>
+                        <div style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);">Coordinator: Angell | Duration: 1 week</div>
+                    </div>
+                    <div class="task-card high">
+                        <div class="task-header">
+                            <div class="task-title">🌐 Website & Official Accounts</div>
+                            <span class="task-owner">Angela</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 30%;"></div></div>
+                    </div>
+                    <div class="task-card high">
+                        <div class="task-header">
+                            <div class="task-title">🔍 On-site Lab Research</div>
+                            <span class="task-owner">Kai/ZeZe</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
+                    </div>
+                    <div class="task-card high">
+                        <div class="task-header">
+                            <div class="task-title">🤖 Phase 1 Prototype Design</div>
+                            <span class="task-owner">Kai</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 15%;"></div></div>
+                    </div>
+                    <div class="task-card medium">
+                        <div class="task-header">
+                            <div class="task-title">📋 Company Registration & Framework</div>
+                            <span class="task-owner">Angell</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tasks -->
+            <div id="tasks-en" class="tab-content">
+                <div class="form-section">
+                    <h3 style="margin-bottom: 24px;">✨ Submit Your Work Progress</h3>
+                    <form id="taskForm-en" onsubmit="submitTask('en', event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>👤 Your Name</label>
+                                <select id="member-en" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Kai">Kai (CTO)</option>
+                                    <option value="Angela">Angela</option>
+                                    <option value="Yin">Yin</option>
+                                    <option value="ZeZe">ZeZe</option>
+                                    <option value="Angell">Angell (CEO)</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>📂 Category</label>
+                                <select id="category-en" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Tech">Tech</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="BD">BD</option>
+                                    <option value="Research">Research</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>📌 Task Title</label>
+                            <input type="text" id="title-en" placeholder="e.g. Completed lab research" required>
+                        </div>
+                        <div class="form-group">
+                            <label>📝 Description</label>
+                            <textarea id="description-en" placeholder="Describe your progress, completed work, issues, needed help..." required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>✅ Status</label>
+                                <select id="status-en" required>
+                                    <option value="Planning">Planning</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Almost Done">Almost Done</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>📅 Due Date</label>
+                                <input type="date" id="dueDate-en" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>🆘 Needed Help (Optional)</label>
+                            <textarea id="needsHelp-en" placeholder="Any blockers or support needed?"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">🚀 Submit Progress</button>
+                    </form>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">📋</span>Team Progress Log</h2>
+                    <div id="worklogContainer-en"></div>
+                </div>
+            </div>
+            
+            <!-- Worklog -->
+            <div id="worklog-en" class="tab-content">
+                <div class="card">
+                    <h2><span class="icon">📊</span>Work Log Archive</h2>
+                    <div id="allWorklogs-en"></div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-number" id="totalTasks-en">0</div><div class="stat-label">Total</div></div>
+                    <div class="stat-card"><div class="stat-number" id="completedTasks-en">0</div><div class="stat-label">Completed</div></div>
+                    <div class="stat-card"><div class="stat-number" id="inProgressTasks-en">0</div><div class="stat-label">In Progress</div></div>
+                    <div class="stat-card"><div class="stat-number" id="pendingTasks-en">0</div><div class="stat-label">Pending</div></div>
                 </div>
             </div>
         </div>
     </div>
     
     <script>
-        let allTasks = JSON.parse(localStorage.getItem('projectTasksV2')) || [];
         let currentLang = 'zh';
+        let allTasks = JSON.parse(localStorage.getItem('projectTasks')) || [];
         
         // 语言切换
         function setLang(lang) {
             currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // 切换所有双语内容
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                el.classList.remove('active-lang');
-                if (el.getAttribute('data-lang') === lang) {
-                    el.classList.add('active-lang');
-                }
-            });
-            
-            // 刷新工作日志
-            updateWorklogDisplay();
-            updateAllWorklogs();
+            document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('content-zh').classList.toggle('active', lang === 'zh');
+            document.getElementById('content-en').classList.toggle('active', lang === 'en');
         }
-        
-        // 初始化语言
-        document.querySelectorAll('[data-lang]').forEach(el => {
-            if (el.getAttribute('data-lang') === 'zh') {
-                el.classList.add('active-lang');
-            }
-        });
         
         // 标签切换
         function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            const lang = tabName.split('-')[1];
+            const tabId = tabName.split('-')[0];
+            document.querySelectorAll(`#content-${lang} .tab-content`).forEach(el => el.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
-            event.target.closest('.tab-btn').classList.add('active');
+            document.querySelectorAll(`#content-${lang} .tab-btn`).forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
             
-            if (tabName === 'worklog') {
-                updateAllWorklogs();
-                updateStats();
+            if (tabId === 'worklog') {
+                updateAllWorklogs(lang);
+                updateStats(lang);
             }
         }
         
         // 提交任务
-        function submitTask(e) {
+        function submitTask(lang, e) {
             e.preventDefault();
-            
             const task = {
                 id: Date.now(),
-                member: document.getElementById('member').value,
-                category: document.getElementById('category').value,
-                title: document.getElementById('title').value,
-                description: document.getElementById('description').value,
-                status: document.getElementById('status').value,
-                dueDate: document.getElementById('dueDate').value,
-                needsHelp: document.getElementById('needsHelp').value,
-                timestamp: new Date().toLocaleString('zh-CN')
+                lang: lang,
+                member: document.getElementById(`member-${lang}`).value,
+                category: document.getElementById(`category-${lang}`).value,
+                title: document.getElementById(`title-${lang}`).value,
+                description: document.getElementById(`description-${lang}`).value,
+                status: document.getElementById(`status-${lang}`).value,
+                dueDate: document.getElementById(`dueDate-${lang}`).value,
+                needsHelp: document.getElementById(`needsHelp-${lang}`).value,
+                timestamp: new Date().toLocaleString()
             };
             
             allTasks.push(task);
-            localStorage.setItem('projectTasksV2', JSON.stringify(allTasks));
+            localStorage.setItem('projectTasks', JSON.stringify(allTasks));
             
-            updateWorklogDisplay();
-            updateAllWorklogs();
-            updateStats();
-            document.getElementById('taskForm').reset();
-            
-            alert(currentLang === 'zh' ? '✅ 提交成功！' : '✅ Submitted successfully!');
+            document.getElementById(`taskForm-${lang}`).reset();
+            alert(lang === 'zh' ? '✅ 提交成功！' : '✅ Submitted successfully!');
         }
         
-        // 工作日志显示
-        function updateWorklogDisplay() {
-            const container = document.getElementById('worklogContainer');
+        // 更新工作日志
+        function updateAllWorklogs(lang) {
+            const container = document.getElementById(`allWorklogs-${lang}`);
+            const langTasks = allTasks.filter(t => t.lang === lang);
             
-            if (allTasks.length === 0) {
+            if (langTasks.length === 0) {
                 container.innerHTML = `<p style="color: var(--text-secondary); text-align: center; padding: 40px;">
-                    ${currentLang === 'zh' ? '暂无工作记录。提交第一条进展吧！' : 'No work logs yet. Submit your first progress!'}
-                </p>`;
-                return;
-            }
-            
-            container.innerHTML = allTasks.slice().reverse().map(task => `
-                <div class="work-log">
-                    <div class="work-log-header">
-                        <div>
-                            <span class="work-log-who">${task.member}</span>
-                            <span class="badge badge-category">${task.category}</span>
-                            <span class="badge badge-status">${task.status}</span>
-                        </div>
-                        <span class="work-log-time">${task.timestamp}</span>
-                    </div>
-                    <div style="margin-top: 12px;">
-                        <strong>📌 ${task.title}</strong>
-                        <p style="margin-top: 8px; color: var(--text-secondary); line-height: 1.6;">${task.description}</p>
-                        ${task.needsHelp ? `<p style="margin-top: 10px; padding: 10px; background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--warning); border-radius: 4px; color: var(--warning); font-size: 14px;"><strong>🆘 ${currentLang === 'zh' ? '需要支持:' : 'Need help:'}</strong> ${task.needsHelp}</p>` : ''}
-                        <p style="margin-top: 8px; font-size: 13px; color: var(--text-secondary);">📅 ${currentLang === 'zh' ? '预期完成:' : 'Due:'} ${task.dueDate}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        // 所有工作日志
-        function updateAllWorklogs() {
-            const container = document.getElementById('allWorklogs');
-            
-            if (allTasks.length === 0) {
-                container.innerHTML = `<p style="color: var(--text-secondary); text-align: center; padding: 40px;">
-                    ${currentLang === 'zh' ? '暂无工作记录' : 'No logs yet'}
-                </p>`;
+                    ${lang === 'zh' ? '暂无工作记录' : 'No logs yet'}</p>`;
                 return;
             }
             
             const grouped = {};
-            allTasks.forEach(task => {
+            langTasks.forEach(task => {
                 if (!grouped[task.member]) grouped[task.member] = [];
                 grouped[task.member].push(task);
             });
@@ -1238,44 +1152,38 @@
             let html = '';
             Object.keys(grouped).forEach(member => {
                 html += `<div style="margin-bottom: 24px; background: var(--glass); border-radius: 12px; overflow: hidden;">
-                    <div style="padding: 16px; background: rgba(14, 165, 233, 0.1); font-weight: 600; border-bottom: 1px solid var(--glass-border);">
-                        👤 ${member}
-                    </div>
-                    <div style="padding: 16px;">
-                        ${grouped[member].map(task => `
-                            <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--glass-border);">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                    <strong>${task.title}</strong>
-                                    <span style="font-size: 12px; color: var(--text-secondary);">${task.timestamp}</span>
-                                </div>
-                                <div style="margin-bottom: 8px;">
-                                    <span class="badge badge-category">${task.category}</span>
-                                    <span class="badge badge-status">${task.status}</span>
-                                </div>
-                                <p style="font-size: 14px; color: var(--text-secondary);">${task.description}</p>
-                                ${task.needsHelp ? `<p style="margin-top: 8px; font-size: 14px; color: var(--warning);">🆘 ${task.needsHelp}</p>` : ''}
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>`;
+                    <div style="padding: 16px; background: rgba(14, 165, 233, 0.1); font-weight: 600; border-bottom: 1px solid var(--glass-border);">👤 ${member}</div>
+                    <div style="padding: 16px;">`;
+                grouped[member].forEach((task, i) => {
+                    html += `<div style="margin-bottom: 16px; padding-bottom: 16px; ${i === grouped[member].length - 1 ? 'border-bottom: none; margin-bottom: 0; padding-bottom: 0;' : 'border-bottom: 1px solid var(--glass-border);'}">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <strong>${task.title}</strong>
+                            <span style="font-size: 12px; color: var(--text-secondary);">${task.timestamp}</span>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <span class="badge badge-category">${task.category}</span>
+                            <span class="badge badge-status">${task.status}</span>
+                        </div>
+                        <p style="font-size: 14px; color: var(--text-secondary);">${task.description}</p>
+                        ${task.needsHelp ? `<p style="margin-top: 8px; font-size: 14px; color: var(--warning);">🆘 ${task.needsHelp}</p>` : ''}
+                    </div>`;
+                });
+                html += `</div></div>`;
             });
-            
             container.innerHTML = html;
         }
         
         // 统计
-        function updateStats() {
-            document.getElementById('totalTasks').textContent = allTasks.length;
-            document.getElementById('completedTasks').textContent = allTasks.filter(t => t.status === '已完成').length;
-            document.getElementById('inProgressTasks').textContent = allTasks.filter(t => t.status === '进行中' || t.status === '即将完成').length;
-            document.getElementById('pendingTasks').textContent = allTasks.filter(t => t.status === '计划中').length;
+        function updateStats(lang) {
+            const langTasks = allTasks.filter(t => t.lang === lang);
+            document.getElementById(`totalTasks-${lang}`).textContent = langTasks.length;
+            document.getElementById(`completedTasks-${lang}`).textContent = langTasks.filter(t => t.status.includes('完') || t.status === 'Completed').length;
+            document.getElementById(`inProgressTasks-${lang}`).textContent = langTasks.filter(t => t.status.includes('进行') || t.status.includes('Almost') || t.status === 'In Progress').length;
+            document.getElementById(`pendingTasks-${lang}`).textContent = langTasks.filter(t => t.status.includes('计划') || t.status === 'Planning').length;
         }
         
         // 默认日期
-        document.getElementById('dueDate').valueAsDate = new Date();
-        
-        // 初始化
-        updateWorklogDisplay();
+        document.querySelectorAll('input[type="date"]').forEach(input => input.valueAsDate = new Date());
     </script>
 </body>
 </html>
